@@ -1,0 +1,89 @@
+.home-container {
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.881);
+  }
+
+  
+  .swiper-image {
+    width: 100%;
+    height: calc(100vh - 80px);
+    object-fit: cover;
+    opacity: 0.2;
+  }
+
+  .swiper-button-prev, .swiper-button-next{
+    color: var(--dark-green) !important;  
+    display: none !important;
+  }
+  .swiper-button-prev{
+    margin-left: 15px;
+  }
+
+  .swiper-pagination-bullet-active{
+    background: var(--dark-green) !important;
+  }
+
+  .home {
+    width: 100%;
+    height: 600px; /* Height based on your requirement */
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .left, .right {
+    border: 1px solid black;
+    flex: 1 1 50%; /* This makes each section 50% of the width */
+    height: 100%; /* Ensures both sections take full height of the parent */
+  }
+
+  .intro-text{
+    
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    z-index: 1000;
+    color: var(--light-green);
+    font-size: 25px;
+    text-align: right;
+    animation: slideInFromBottom 1s ease-out;
+  }
+
+  @keyframes slideInFromBottom {
+    0% {
+      transform: translateY(100%); /* Start off-screen at the bottom */
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0); /* End at the original position */
+      opacity: 1;
+    }
+  }
+
+  .explore-btn{
+    margin: 20px 10px 0 0 ;
+    color:  var(--light-green);
+    background-color: var(--dark-green);
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    margin-left: 20px;
+    cursor: pointer;
+    border-radius: 50px;
+  }
+
+  @media (max-width: 1024px) {
+    .intro-text{
+      font-size: 23px;
+      top: 30%;
+      line-height: 80px;
+    }
+
+    .explore-btn{
+      font-size: 20px;
+    }
+
+    .swiper-button-prev{
+      margin-left: 0;
+    }
+  }
