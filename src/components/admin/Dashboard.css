@@ -1,26 +1,34 @@
 .admin-blog {
     width: 100vw;
     display: flex;
-    transition: margin-left 0.3s ease; /* Added for smooth transition */
+    transition: margin-left 0.3s ease;
 }
 
-.sidebar {
-    width: 250px; /* Sidebar width when open */
+.sidebar{
     background-color: var(--dark-green);
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
     min-height: 100vh;
-    z-index: 99;
+    width: 240px;
+    position: relative;
     transition: transform 0.3s ease; /* Added for sliding effect */
-    transform: translateX(0); 
+    transform: translateX(0);  
+    z-index: 99;
 }
 
-.sidebar.collapsed {
-    transform: translateX(-100%); /* Move sidebar out of view */
+.sidebar-options{
+    position: sticky;
+    width: 240px;
+    overflow-y: auto;
+    max-height: calc(100vh - 100px); 
+    top: 80px;
 }
 
 .sidebar h2 {
-    padding: 20px;
+    padding: 20px 20px 15px 20px;
     color: var(--orange);
+}
+
+.sidebar.collapsed {
+    transform: translateX(-100%);
 }
 
 .sidebar ul {
@@ -28,9 +36,15 @@
     padding: 0;
 }
 
-.sidebar ul li {
+.list-heading{
     padding: 15px 0 15px 30px;
-    border-bottom: 1px solid lightgrey;
+    color: var(--orange);
+    font-weight: 600;
+}
+
+.hover li {
+    padding: 10px 0 10px 50px;
+    font-size: 15px;
     cursor: pointer;
     color: var(--light-green);
 }
@@ -41,7 +55,7 @@
     transition: background-color 0.3s ease;
 }
 
-.sidebar ul li:hover {
+.hover li:hover {
     background-color: var(--light-green);
     color: var(--dark-green);
 }
@@ -81,7 +95,16 @@
     align-items: center;
     justify-content: center;
     border-bottom: 3px solid lightgray;
-    cursor: pointer;
+    
+}
+
+.smaller-screen{
+    display: none;
+}
+
+.larger-screen{
+    display: block;
+    /* position: fixed; */
 }
 
 /* Responsive behavior for small screens */
@@ -91,13 +114,43 @@
         margin-left: -200px;
     }
 
+    .smaller-screen{
+        display: inline;
+    }
+
+    .left-arrow-icon{
+        margin-right: 18px;
+    }
+
+    .left-arrow{
+        cursor: pointer;
+    }
+    
+    .larger-screen{
+        display: none;
+    }
     .sidebar {  
         width: 200px;
+    }
+
+    .sidebar h2{
+        padding: 20px;
     }
 
     .right-arrow {
         display: flex;
         cursor: pointer;
+    }
+
+    .list-heading{
+        padding: 15px 0 15px 15px;
+    }
+    
+    .hover li {
+        padding: 10px 0 10px 30px;
+        font-size: 15px;
+        cursor: pointer;
+        color: var(--light-green);
     }
 }
 

@@ -6,6 +6,7 @@ import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import About from './components/about/About';
 import Courses from './components/courses/Courses';
+// import Drawer from './components/admin/Drawer'
 import Careers from './components/careers/Careers';
 import Contact from './components/contact/Contact';
 import Blogs from './components/blogs/Blogs';
@@ -16,6 +17,9 @@ import Login from './components/login/Login';
 import Dashboard from './components/admin/Dashboard';
 import BlogDetail from './components/blogdetail/BlogDetail';
 import CreatePost from './components/admin/createpost/CreatePost';
+import { toast, Toaster } from 'sonner';
+import { HelmetProvider } from 'react-helmet-async';
+import CourseDetail from './components/coursedetail/CourseDetail';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -28,14 +32,13 @@ const ScrollToTop = () => {
 };
 
 // Protected Route Component
-const ProtectedRoute = ({ element, logged, email }) => {
+const ProtectedRoute = ({ element, logged, userEmail }) => {
+   
     if (!logged) {
-        return <Navigate to="/" />; // Redirect to home if not logged in
+        return <Navigate to="/" />;
     }
-    if (email !== "admin@medicmode.com") {
-        return <Navigate to="/" />; // Redirect to home if not admin
-    }
-    return element; // Allow access if logged in and is admin
+   
+    return React.cloneElement(element, { userEmail });
 };
 
 function App() {
@@ -43,7 +46,7 @@ function App() {
     const [isSignUp, setIsSignUp] = useState(false);
     const [logged, setLogged] = useState(false);
     const [error, setError] = useState('');
-    const [userEmail, setUserEmail] = useState(''); // Store user email
+    const [userEmail, setUserEmail] = useState(''); 
 
     const style = {
         position: 'fixed',
@@ -82,28 +85,43 @@ function App() {
         setLogged(false);
         localStorage.removeItem('loggedUser');
         setUserEmail('');
-        window.location.reload();
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000); 
+        toast.success('Logout successful!', {
+            duration: 3000 
+        });
     };
+
+ 
 
     return (
         <Router>
             <div className="App">
+            <HelmetProvider>
+            <Toaster position="top-center" richColors/>
                 <ScrollToTop />
                 <header>
                     <Header handleOpen={handleOpen} logged={logged} handleLogout={handleLogout} userEmail={userEmail} />
                 </header>
                 <main className="main-content">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/courses" element={<Courses />} />
-                        <Route path="/blog" element={<Blogs userEmail={userEmail} logged={logged}/>} />
-                        <Route path="/blog/create-post" element={<CreatePost />} />
-                        <Route path="/careers" element={<Careers />} />
-                        <Route path="/contact" element={<Contact />} />
-                        <Route path="/dashboard/*" element={<ProtectedRoute element={<Dashboard />} logged={logged} email={userEmail} />} />
-                        <Route path="/blog/:postId" element={<BlogDetail />} />
+                <Routes> 
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/courses" element={<Courses />} />
+                    <Route path="/courses/:courseId" element={<CourseDetail userEmail={userEmail} handleOpen={handleOpen} logged={logged}/>} />
+                    <Route path="/blog/" element={<Blogs userEmail={userEmail} logged={logged} handleOpen={handleOpen}/>} />
+                    <Route path="/blog/create-post" element={
+                        <ProtectedRoute 
+                        element={ <CreatePost />} logged={logged} userEmail={userEmail}>                                       
+                         </ProtectedRoute>} />
+                    <Route path="/careers" element={<Careers />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/dashboard/*" element={<ProtectedRoute element={<Dashboard />} logged={logged} userEmail={userEmail} />} />
+                    <Route path="/blog/:postId" element={<BlogDetail userEmail={userEmail} handleOpen={handleOpen} logged={logged}/>} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
+                    
                 </main>
                 <footer>
                     <Footer />
@@ -138,6 +156,7 @@ function App() {
                         )}
                     </Box>
                 </Modal>
+                </HelmetProvider>
             </div>
         </Router> 
     );

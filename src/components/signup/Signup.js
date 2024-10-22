@@ -6,6 +6,7 @@ import { collection, query, where, getDocs, addDoc } from "firebase/firestore"; 
 import { db } from '../../firebase'; // Firebase config
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { toast, Toaster } from 'sonner';
 
 const Signup = ({ setIsSignUp, handleClose, error, setError }) => {
 	const [firstName, setFirstName] = useState('');
@@ -20,7 +21,6 @@ const Signup = ({ setIsSignUp, handleClose, error, setError }) => {
 	const [email, setEmail] = useState('');
 	const [isValidEmail, setIsValidEmail] = useState(true);
 	const [phone, setPhone] = useState('');
-	const [address, setAddress] = useState('');
 	const [city, setCity] = useState('');
 	const [state, setState] = useState('');
 	const [country, setCountry] = useState('');
@@ -75,7 +75,6 @@ const Signup = ({ setIsSignUp, handleClose, error, setError }) => {
 		organization: organization,
 		email: email,
 		phone: phone,
-		address: address,
 		city: city,
 		state: state,
 		country: country,
@@ -96,8 +95,7 @@ const Signup = ({ setIsSignUp, handleClose, error, setError }) => {
         setExperience(''); 
         setOrganization(''); 
         setEmail(''); 
-        setPhone(''); 
-        setAddress(''); 
+        setPhone('');
         setCity(''); 
         setState(''); 
         setCountry(''); 
@@ -107,12 +105,17 @@ const Signup = ({ setIsSignUp, handleClose, error, setError }) => {
         setPassword('');
 
       setError('');  
-      alert('User signed up successfully!');
+	  toast.success('Registration successful! Welcome!', {
+		duration: 3000 
+		}); 
       handleClose();
     } catch (error) {
       console.error("Error signing up:", error);
-      setError('An error occurred. Please try again later.');
+	  toast.error('An error occurred. Please try again later.', {
+		duration: 3000 
+		}); 
     }
+
   };
 
   useEffect(() => {
@@ -139,9 +142,9 @@ const Signup = ({ setIsSignUp, handleClose, error, setError }) => {
   };
 
   const handleChange = (e) => {
-    const inputEmail = e.target.value;
+    const inputEmail = e.target.value.toLowerCase();
     setEmail(inputEmail);
-    setIsValidEmail(validateEmail(inputEmail)); // Validate email as user types
+    setIsValidEmail(validateEmail(inputEmail)); 
   };
 
    /**************Other Status************************/
@@ -180,6 +183,7 @@ const Signup = ({ setIsSignUp, handleClose, error, setError }) => {
 
   return (
     <div className='signup'>
+		<Toaster position="top-center" richColors /> 
       <CloseIcon className='close-modal' onClick={handleClose} />
       <div className="login-logo">
         <img src={logo} alt="" width='100px' height='45px' />
@@ -238,7 +242,7 @@ const Signup = ({ setIsSignUp, handleClose, error, setError }) => {
 				<option value="" disabled>Select Gender</option>
 				<option value="male">Male</option>
 				<option value="female">Female</option>
-				<option value="other">Other</option>
+				<option value="other">Others</option>
 				</select>
 				</div>
 
@@ -273,10 +277,9 @@ const Signup = ({ setIsSignUp, handleClose, error, setError }) => {
 			required
 			>
 			<option value="" disabled>Select Current Status</option>
-			<option value="paramedic">Paramedic</option>
-			<option value="emt">EMT</option>
 			<option value="student">Student</option>
-			<option value="other">Other</option>
+			<option value="employed">Employed</option>
+			<option value="other">Others</option>
 			</select>
 		</div>
 		{status === 'other' && (
@@ -296,13 +299,16 @@ const Signup = ({ setIsSignUp, handleClose, error, setError }) => {
 
 	<div className="row">
 		<div className="item">
-			<label htmlFor="job-title">Job Title/Designation (If applicable)</label>
+			<label htmlFor="job-title">
+			{status === 'student' ? 'Field of Study' : 'Job Title/Designation'}
+			</label>
 			<input
 			type="text"
 			id="job-title"
-			placeholder="Job Title/Designation"
+			placeholder={status === 'student' ? 'Field of Study' : 'Job Title/Designation'}
 			value={jobTitle}
 			onChange={(e) => setJobTitle(e.target.value)}
+			required
 			/>
 		</div>
 		<div className="item">
@@ -360,19 +366,6 @@ const Signup = ({ setIsSignUp, handleClose, error, setError }) => {
 		</div>
 	</div>
 
-	<div className="row">
-		<div className="item">
-			<label htmlFor="address-line">Address</label>
-			<input
-				type="text"
-				id="address-line"
-				placeholder="Flat/House No, Street name"
-				value={address}
-				onChange={(e) => setAddress(e.target.value)}
-				required
-			/>
-		</div>
-	</div>
 	<div className="row" >
 		<div className="item">
 			<label htmlFor="city">City</label>

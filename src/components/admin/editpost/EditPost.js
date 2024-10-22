@@ -1,45 +1,53 @@
-import React, { useState } from 'react';
-import './CreatePost.css';
+import React, {  useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { Editor } from 'primereact/editor'; 
-import { db, storage } from '../../../firebase'; 
-import { collection, addDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'; 
+import { Editor } from 'primereact/editor';
+import { db, storage } from '../../../firebase'; // Adjust the path as necessary
+import { doc, updateDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'; // Firebase Storage imports
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast, Toaster } from 'sonner';
 
-
-const CreatePost = ({userEmail}) => {
-  const [author, setAuthor] = useState('');
-  const [coAuthor, setCoAuthor] = useState('');
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
-  const [content, setContent] = useState('');
-  const [keyword, setKeyword] = useState([]);
-  const [reference, setReference] = useState('');
+const EditPost = () => {
+  const { state } = useLocation();
+  const [author, setAuthor] = useState(state.author || '');
+  const [coAuthor, setCoAuthor] = useState(state.coAuthor || '');
+  const [title, setTitle] = useState(state.title || '');
+  const [category, setCategory] = useState(state.category || '');
+  const [content, setContent] = useState(state.content || '');
+  const [keyword, setKeyword] = useState(state.keyword || []);
+  const [reference, setReference] = useState(state.reference || '');
   const [thumbnail, setThumbnail] = useState(null);
-  const [preview, setPreview] = useState(null);
-  const [youtubeUrl, setYoutubeUrl] = useState('')
+  const [preview, setPreview] = useState(state.thumbnail || '');
+  const [youtubeUrl, setYoutubeUrl] = useState(state.youtubeUrl || '');
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
+  const postId = state.id;
+
+  // Handle thumbnail image upload
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const storageRef = ref(storage, `thumbnails/${file.name}`);
+      uploadBytes(storageRef, file)
+        .then(() => getDownloadURL(storageRef))
+        .then((url) => {
+          setThumbnail(url);
+          setPreview(url);
+        })
+        .catch((error) => {
+          toast.error('Error uploading image');
+          console.error('Error uploading image:', error);
+        });
+    }
+  };
+
+  // Handle form submission
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      let thumbnailURL = '';
-
-      // If a thumbnail is uploaded, upload it to Firebase Storage
-      if (thumbnail) {
-        const storageRef = ref(storage, `thumbnails/${thumbnail.name}`);
-        const uploadSnapshot = await uploadBytes(storageRef, thumbnail);
-        thumbnailURL = await getDownloadURL(uploadSnapshot.ref); // Get the URL of the uploaded thumbnail
-      }
-
-      // Add the post data to Firestore, including the thumbnail URL
-      const docRef = await addDoc(collection(db, 'blogPosts'), {
+      await updateDoc(doc(db, 'blogPosts', postId), {
         author,
         coAuthor,
         title,
@@ -47,65 +55,23 @@ const CreatePost = ({userEmail}) => {
         content,
         keyword,
         reference,
-        thumbnail: thumbnailURL, // Store the URL, not the File object
-        dateCreated: new Date().toISOString(),
+        thumbnail: thumbnail || state.thumbnail, 
         approved: 'no',
         youtubeUrl
       });
+      toast.success('Post updated successfully');
 
-      console.log('Document written with ID: ', docRef.id);
-
-      // Reset the form after submission
-      setAuthor('');
-      setCoAuthor('');
-      setTitle('');
-      setCategory('');
-      setContent('');
-      setKeyword([]);
-      setReference('');
-      setThumbnail(null);
-      setPreview(null);
-      setYoutubeUrl('')
-
-      if (location.pathname === '/blog/create-post') {
-        alert("Your blog has been successfully received! It will be validated and displayed on our site within 24 hours.");
-        navigate('/blog'); 
-      } else if (location.pathname === '/dashboard/create-post') {
-        toast.success('Blog saved successfully.', {
-          duration: 3000 
-        });
-        window.scrollTo(0, 0);
-      }
-
-    } catch (e) {
-      console.error('Error adding document: ', e);
+      navigate('/dashboard')
+    } catch (error) {
+      toast.error('Error updating post');
+      console.error('Error updating post:', error);
     }
   };
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setThumbnail(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result); // Create a preview of the image
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleRemoveImage = () => {
-    setThumbnail(null);
-    setPreview(null);
-  };
-
-
-
 
   return (
     <div className="create-post-container">
-      <Toaster position="top-center" richColors/>
-      <h1>Create Blog</h1>
+      <Toaster position="top-center" richColors />
+      <h1>Edit Blog</h1>
       <form onSubmit={handleSubmit}>
         <div className="p-field">
           <label htmlFor="author">Author Full Name</label>
@@ -157,7 +123,7 @@ const CreatePost = ({userEmail}) => {
           <label htmlFor="keyword">Keywords (Optional) (Separate by comma)</label>
           <input
             id="keyword"
-            value={keyword}
+            value={keyword.join(', ')}
             onChange={(e) => setKeyword(e.target.value.split(',').map(kw => kw.trim()))}
           />
         </div>
@@ -192,7 +158,10 @@ const CreatePost = ({userEmail}) => {
               />
               <button
                 type="button"
-                onClick={handleRemoveImage}
+                onClick={() => {
+                  setPreview('');
+                  setThumbnail(null);
+                }}
                 style={{
                   position: 'absolute',
                   top: '5px',
@@ -224,23 +193,19 @@ const CreatePost = ({userEmail}) => {
             style={{ minHeight: '300px', backgroundColor: 'white' }}
           />
         </div>
-          {userEmail === 'admin@medicmode.com' && (
-            <div className="p-field">
+        <div className="p-field">
               <label htmlFor="youtubeUrl">Youtube Link</label>
               <InputText
                 id="youtubeUrl"
                 value={youtubeUrl}
                 onChange={(e) => setYoutubeUrl(e.target.value)}
               />
-            </div>
-          )}
-        
-        <Button className="create-post-btn" type="submit" label="Create Post" />
+        </div>
+
+        <Button className="create-post-btn" type="submit" label="Update Post" />
       </form>
     </div>
   );
 };
 
-
-
-export default CreatePost;
+export default EditPost;

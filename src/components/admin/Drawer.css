@@ -1,0 +1,11 @@
+.custom-toast .p-toast {
+    padding: 1rem !important; /* Adjust the padding as needed */
+  }
+  
+  .custom-toast .p-toast-header {
+    font-weight: bold; /* Make the header bold */
+  }
+  
+  .custom-toast .p-toast-message {
+    font-size: 0.9rem !important; /* Adjust the message font size */
+  }

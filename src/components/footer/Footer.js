@@ -33,8 +33,8 @@ const Footer = () => {
             <div className="address">
                 <h3>GET IN TOUCH</h3>
                 <div className="footer-address">
-                    <p><span style={{marginRight: '8px'}}><MailOutlineIcon /></span><p>samuelponraj14@gmail.com</p></p>
-                    <p><span style={{marginRight: '8px'}}><PhoneIcon/></span>9941615894</p>
+                    <p><span style={{marginRight: '8px'}}><MailOutlineIcon /></span>contact@medicmode.com</p>
+                    <p><span style={{marginRight: '8px'}}><PhoneIcon/></span>9551943040</p>
                     <p style={{lineHeight: '28px'}}><span style={{marginRight: '8px'}}><LocationOnIcon/></span>Four Seson Residense IV, No. 193/1B, <br/> Flat A2, 1st Floor, Anna main road,<br/> Kolapakkam, Chennai: 600128 </p>
                 </div>
             </div>

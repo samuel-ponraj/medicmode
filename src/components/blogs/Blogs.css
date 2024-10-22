@@ -127,11 +127,11 @@
 }
 
 .blog-options {
-    padding: 20px;
+    padding: 20px ;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-    margin: 20px 0;
+    margin: 20px ;
     background-color: var(--light-green);
    
 }
@@ -148,7 +148,6 @@
     align-items: center;
 }
 
-
 .options{
     display: flex;
     width: 100%;
@@ -160,6 +159,37 @@
     padding: 10px;
     border: none;
     border-radius: 10px;
+}
+
+.user-create-blog{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.user-create-blog h1{
+    color: var(--dark-green);
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 19px;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.create-user-blog-btn{
+    background-color: var(--dark-green) !important;
+    color: var(--light-green) !important;
+    padding: 10px 20px !important;
+    font-size: 13px;
+    margin-top: 5px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 25px !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.create-user-blog-btn:hover {
+    color: var(--orange) !important; /* Change text color on hover */
 }
 
 .secondary {
@@ -191,13 +221,13 @@
     flex-direction: column;
     gap: 10px;
     margin-top: 10px;
-    flex-grow: 1; /* Allow descriptions to grow and fill space */
+    flex-grow: 1; 
 }
 
 .descriptions p {
     font-size: 13px;
     color: var(--grey);
-
+    font-weight: 600;
 }
 
 .details {
@@ -225,7 +255,7 @@
 .likes {
     display: flex;
     align-items: center;
-    gap: 30px;
+    /* gap: 30px; */
     margin-top: auto; /* Push likes to the bottom */
     color: var(--dark-green);
 }
@@ -300,6 +330,7 @@
         transform: translateY(-50px); /* Start off-screen (above) */
         transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s; 
         visibility: hidden; /* Hide the menu initially */
+        margin: 20px 0;
       }
       
       .blog-options.open {
@@ -307,6 +338,7 @@
         transform: translateY(0); /* Slide into position */
         visibility: visible; /* Make the menu visible */
         transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s; /* Remove delay for visibility */
+        
       }
       
 
@@ -320,6 +352,23 @@
 
     .other-blogs img {
         height: auto;
+    }
+
+    .user-create-blog{
+        display: none;
+    }
+
+    .create-user-blog{
+            padding: 0 !important;
+            box-shadow: none !important;
+            text-transform: none !important;
+            border-left: 1px solid var(--light-green) !important;
+            border-radius: 0 !important;
+            padding-left: 10px !important;
+            margin: 0 !important;
+            font-size: 16px !important;
+            font-family: "Titillium", sans-serif !important;
+        
     }
 }
 

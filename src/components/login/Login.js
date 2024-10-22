@@ -4,6 +4,7 @@ import logo from '../../assets/logos/medicmode-logo.png';
 import CloseIcon from '@mui/icons-material/Close';
 import { query, where, getDocs, collection, doc, updateDoc } from "firebase/firestore";
 import { db } from '../../firebase';
+import { toast, Toaster } from 'sonner';
 
 const Login = ({ setIsSignUp, handleClose, setLogged, error, setError, setUserEmail }) => {
   const [checked, setChecked] = useState(false);
@@ -31,10 +32,14 @@ const Login = ({ setIsSignUp, handleClose, setLogged, error, setError, setUserEm
                 setLogged(true);
                
                 localStorage.setItem('loggedUser', email); 
+                toast.success('Login successful!', {
+                  duration: 2000 // Show toast for 2 seconds
+              });
+
                 handleClose();
                 setUserEmail(email); // Set the user's email
 
-                alert("Login successful!");
+               
                 setEmail('');
             } else {
                 setError("Incorrect password.");
@@ -95,8 +100,9 @@ const Login = ({ setIsSignUp, handleClose, setLogged, error, setError, setUserEm
         password: password,  // Update the user's password field in Firestore
         passwordUpdatedTimestamp: new Date()  // Record the password update timestamp
       });
-
-      setError('Password updated successfully.');
+      toast.success('Password updated successfully.', {
+        duration: 2000 // Show toast for 2 seconds
+      });
       setForgotPassword(false);  // Switch back to login mode
       setEmail('');
       setPassword('');
@@ -110,6 +116,7 @@ const Login = ({ setIsSignUp, handleClose, setLogged, error, setError, setUserEm
 
   return (
     <div className='login'>
+      <Toaster position="top-center" richColors/>
       <CloseIcon className='close-modal' onClick={handleClose} />
       <div className="login-logo">
         <img src={logo} alt="" width='100px' height='45px' />
@@ -125,7 +132,7 @@ const Login = ({ setIsSignUp, handleClose, setLogged, error, setError, setUserEm
               <input type="email"
                 placeholder="Email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)} />
+                onChange={(e) => setEmail(e.target.value.toLowerCase())}/>
 				{checked ? (
                 <>
                   <input

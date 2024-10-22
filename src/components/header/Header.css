@@ -107,7 +107,6 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      
       padding: 10px;
       opacity: 0;     /* Start with opacity 0 */
       transform: translateY(-50px);  /* Start off-screen (above) */
@@ -150,11 +149,13 @@
       width: 100%;
       margin-bottom: 20px;
     }
+
+
   
     .nav-list ul li {
       text-align: left;
       padding-left: 20px;
-      font-size: 18px;
+      font-size: 15px;
     }
   
     /* Show menu icon on mobile */
@@ -166,6 +167,7 @@
     .login-register-btn{
       margin-left: 0;
       margin-top: 10px;
+      padding: 10px 20px;
     }
     
   }

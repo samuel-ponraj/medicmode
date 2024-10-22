@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../../firebase'; // Adjust the path as necessary
 import { collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { Link } from 'react-router-dom';
 import './ReviewPost.css';
+import { Link, Route, Routes } from 'react-router-dom';
+import EditPost from '../editpost/EditPost';
 
 const ReviewPost = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [approvalStatus, setApprovalStatus] = useState({}); // State for approval status
-  const [approvedPosts, setApprovedPosts] = useState([]); // State for approved blog posts
+  const [approvalStatus, setApprovalStatus] = useState({});
+  const [approvedPosts, setApprovedPosts] = useState([]);
 
   useEffect(() => {
     const fetchBlogPosts = async () => {
@@ -17,12 +18,19 @@ const ReviewPost = () => {
         const posts = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setBlogPosts(posts);
 
-        // Initialize approval status for each post
+        // Initialize approval status and approved posts
         const initialApprovalStatus = {};
+        const approvedList = []; // Temporary array to hold approved posts
+
         posts.forEach((post) => {
-          initialApprovalStatus[post.id] = false; // Set default approval status to false
+          initialApprovalStatus[post.id] = post.approved === 'yes'; // Check Firestore approval status
+          if (initialApprovalStatus[post.id]) {
+            approvedList.push(post); // Add to approved list if already approved
+          }
         });
+
         setApprovalStatus(initialApprovalStatus);
+        setApprovedPosts(approvedList);
       } catch (error) {
         console.error('Error fetching blog posts: ', error);
       } finally {
@@ -34,25 +42,26 @@ const ReviewPost = () => {
   }, []);
 
   const handleApprovalChange = async (postId) => {
-    const isApproved = approvalStatus[postId]; // Get current approval status
-    const newApprovalStatus = !isApproved; // Toggle approval status
+    const isApproved = approvalStatus[postId];
+    const newApprovalStatus = !isApproved;
 
     setApprovalStatus((prevState) => ({
       ...prevState,
-      [postId]: newApprovalStatus, // Update local state
+      [postId]: newApprovalStatus,
     }));
 
-    // Find the approved post
     const approvedPost = blogPosts.find((post) => post.id === postId);
     if (approvedPost) {
-      if (!approvedPosts.includes(approvedPost)) {
+      // Update approved posts state
+      if (newApprovalStatus && !approvedPosts.includes(approvedPost)) {
         setApprovedPosts((prevApproved) => [...prevApproved, approvedPost]);
+      } else if (!newApprovalStatus) {
+        setApprovedPosts((prevApproved) => prevApproved.filter((post) => post.id !== postId));
       }
 
       try {
-        // Update Firestore document to include the approved field
         await updateDoc(doc(db, 'blogPosts', postId), {
-          approved: newApprovalStatus ? 'yes' : 'no', // Set the approved field based on new status
+          approved: newApprovalStatus ? 'yes' : 'no',
         });
       } catch (error) {
         console.error('Error updating blog post approval status: ', error);
@@ -62,7 +71,7 @@ const ReviewPost = () => {
 
   const formatDate = (date) => {
     if (!date) {
-      return 'N/A'; // Handle missing or undefined dates
+      return 'N/A';
     }
 
     if (typeof date === 'object' && date.seconds) {
@@ -82,11 +91,15 @@ const ReviewPost = () => {
   };
 
   const handleDelete = async (postId) => {
-    try {
-      await deleteDoc(doc(db, 'blogPosts', postId)); // Delete post from Firestore
-      setBlogPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId)); // Remove post from state
-    } catch (error) {
-      console.error('Error deleting blog post: ', error);
+    const confirmDelete = window.confirm('Are you sure you want to delete this post?');
+
+    if (confirmDelete) {
+      try {
+        await deleteDoc(doc(db, 'blogPosts', postId));
+        setBlogPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+      } catch (error) {
+        console.error('Error deleting blog post: ', error);
+      }
     }
   };
 
@@ -94,12 +107,13 @@ const ReviewPost = () => {
     return <div>Loading...</div>;
   }
 
+ 
+
   return (
-    <>
-      <div className="review-post-container">
-        <h1>Review Post</h1>
-        {blogPosts.length > 0 ? (
-          <div className="scroll">
+    <div className="review-post-container">
+      <h1>Review Post</h1>
+      {blogPosts.length > 0 ? (
+        <div className="scroll">
           <table>
             <thead>
               <tr>
@@ -109,7 +123,7 @@ const ReviewPost = () => {
                 <th>Author Name</th>
                 <th>Co Authors</th>
                 <th>Category</th>
-                <th>Content</th>
+                <th colSpan="2">Content</th>
                 <th>Thumbnail</th>
                 <th colSpan="2">Actions</th>
               </tr>
@@ -127,6 +141,23 @@ const ReviewPost = () => {
                     <Link to={`/blog/${post.id}`} target="_blank" rel="noopener noreferrer">
                       View Post
                     </Link>
+                  </td>
+                  <td>
+                  <Link to="/dashboard/review-post/edit-post" 
+                        state={{ id: post.id, 
+                                author: post.author,
+                                coAuthor: post.coAuthor,
+                                category: post.category,
+                                title: post.title,
+                                keyword: post.keyword,
+                                reference: post.reference,
+                                thumbnail: post.thumbnail,
+                                youtubeUrl: post.youtubeUrl,
+                                preview: post.preview,
+                                content: post.content}}>
+                    Edit Post
+                  </Link>
+
                   </td>
                   <td>
                     {post.thumbnail ? (
@@ -155,12 +186,16 @@ const ReviewPost = () => {
               ))}
             </tbody>
           </table>
-          </div>
-        ) : (
-          <div>No blog posts available.</div>
-        )}
-      </div>
-    </>
+        </div>
+      ) : (
+        <div>No blog posts available.</div>
+      )}
+     <Routes>
+        <Route path="edit-post" element={<EditPost />} />  
+      </Routes>
+
+    </div>
+    
   );
 };
 

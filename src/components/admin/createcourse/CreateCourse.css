@@ -1,4 +1,4 @@
-.create-post-container{
+.create-course-container{
     width: 100%;
     margin: 40px auto;
     display: flex;
@@ -7,7 +7,7 @@
     font-size: 15px;
 }
 
-.create-post-container h1{
+.create-course-container h1{
     text-align: center; 
 }
 
@@ -16,11 +16,11 @@
     flex-direction: column;
 }
 
-.create-post-container form{
+.create-course-container form{
     padding: 30px;
 }
 
-.create-post-container form input, .create-post-container form select, .thumbnail-preview{
+.create-course-container form input, .create-course-container form select, .thumbnail-preview{
     padding: 10px;
     margin: 10px 0 20px 0;
     border: 1px solid lightgray;
@@ -33,7 +33,7 @@
 
 }
 
-.create-post-btn{
+.create-course-btn{
     background-color: var(--dark-green);
     color: var(--light-green);
     padding: 10px 30px;
@@ -46,11 +46,11 @@
 
 @media (max-width: 768px){
 
-    .create-post-container{
+    .create-course-container{
         width: 99%;
     }
 
-    .create-post-container form{
+    .create-course-container form{
         padding: 30px 15px;
     }
 

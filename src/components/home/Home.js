@@ -5,9 +5,9 @@ import bg2 from '../../assets/bg2.jpg';
 import bg3 from '../../assets/bg3.jpg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';  // Core Swiper styles
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';  // Correct imports
-import 'swiper/css/navigation';  // Navigation styles
-import 'swiper/css/pagination';  // Pagination styles
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';  
+import 'swiper/css/navigation';  
+import 'swiper/css/pagination';  
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -33,7 +33,7 @@ const Home = () => {
       </div>
       <div className="intro-text">
         <h1>Welcome to Medic <span style={{color: 'var(--orange)'}}>Mode</span></h1>
-        <Link to="/about" ><button className='explore-btn'>Explore more</button></Link>
+        <Link to="/blog" ><button className='explore-btn'>Explore more</button></Link>
         
       </div>
     </div>

@@ -27,13 +27,18 @@ const UserTable = () => {
   }, []);
 
   const handleDelete = async (userId) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this user?');
+
+    if(confirmDelete){
     try {
       await deleteDoc(doc(db, 'users', userId)); // Delete the user from Firestore
-      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId)); // Update the state
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId)); 
+      
     } catch (error) {
       console.error('Error deleting user: ', error);
     }
-  };
+  }
+};
 
   const formatDate = (timestamp) => {
     if (timestamp && timestamp.seconds) {
