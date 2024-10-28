@@ -20,6 +20,7 @@ import { toast, Toaster } from 'sonner';
 import { HelmetProvider } from 'react-helmet-async';
 import CourseDetail from './components/coursedetail/CourseDetail';
 
+
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 

@@ -1,75 +1,51 @@
-// ImageGallery.js
-import React from 'react';
+// ImageGrid.js
+import React, { useEffect } from 'react';
 import './ImageGrid.css'
-import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
-import 'lightgallery.js/dist/css/lightgallery.css'; 
-import bg1 from '../../../assets/bg1.jpg';
-import bg2 from '../../../assets/bg2.jpg';
-import bg3 from '../../../assets/bg3.jpg';
+import { Fancybox } from '@fancyapps/ui';
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
 
-const images = [
-  {
-    src: bg1,
-    thumbnail: bg1,
-    title: 'Image 1',
-  },
-  {
-    src: bg1,
-    thumbnail: bg1,
-    title: 'Image 1',
-  },
-  {
-    src: bg2,
-    thumbnail: bg2,
-    title: 'Image 2',
-  },
-  {
-    src: bg2,
-    thumbnail: bg2,
-    title: 'Image 2',
-  },
-  {
-    src: bg3,
-    thumbnail: bg3,
-    title: 'Image 3',
-  },
-  {
-    src: bg3,
-    thumbnail: bg3,
-    title: 'Image 3',
-  },
-  {
-    src: bg3,
-    thumbnail: bg3,
-    title: 'Image 3',
-  },
-  {
-    src: bg3,
-    thumbnail: bg3,
-    title: 'Hello',
-  },
-  // Add more images as needed
-];
 
 const ImageGrid = () => {
+  useEffect(() => {
+    // Initialize Fancybox on component mount
+    Fancybox.bind('[data-fancybox]', {
+      Carousel: {
+        infinite: false,
+      },
+    });
+
+    return () => {
+      // Cleanup: Unbind Fancybox on component unmount
+      Fancybox.destroy();
+    };
+  }, []);
+
+  const images = [
+    { id: 1, src: 'https://lipsum.app/id/60/1600x1200', thumb: 'https://lipsum.app/id/60/200x150' },
+    { id: 2, src: 'https://lipsum.app/id/61/1600x1200', thumb: 'https://lipsum.app/id/61/200x150' },
+    { id: 3, src: 'https://lipsum.app/id/62/1600x1200', thumb: 'https://lipsum.app/id/62/200x150' },
+    { id: 4, src: 'https://lipsum.app/id/63/1600x1200', thumb: 'https://lipsum.app/id/63/200x150' },
+    { id: 5, src: 'https://lipsum.app/id/64/1600x1200', thumb: 'https://lipsum.app/id/64/200x150' },
+    { id: 5, src: 'https://lipsum.app/id/64/1600x1200', thumb: 'https://lipsum.app/id/64/200x150' },
+    { id: 5, src: 'https://lipsum.app/id/64/1600x1200', thumb: 'https://lipsum.app/id/64/200x150' },
+    { id: 5, src: 'https://lipsum.app/id/64/1600x1200', thumb: 'https://lipsum.app/id/64/200x150' },
+    { id: 5, src: 'https://lipsum.app/id/64/1600x1200', thumb: 'https://lipsum.app/id/64/200x150' },
+  ];
+
   return (
-    <LightgalleryProvider  >
     <div className='image-gallery' style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-      {images.map((image, index) => (
-        <LightgalleryItem 
-         
-          key={index}
-          group="group1"
-          src={image.src}
-          thumb={image.thumbnail}
-          subHtml={`<h4>${image.title}</h4>`} 
-          
-        >
-          <img src={image.thumbnail} alt={image.title} style={{ borderRadius: '5px' }} />
-        </LightgalleryItem>
+      {images.map((image) => (
+        <a key={image.id} data-fancybox="gallery" href={image.src}>
+          <img
+            alt=""
+            src={image.thumb}
+            width="350"
+            height="auto"
+            style={{ margin: '5px', borderRadius: '5px' }}
+          />
+        </a>
       ))}
     </div>
-  </LightgalleryProvider>
   );
 };
 

@@ -2,61 +2,13 @@
     max-width: 1300px;
     width: 100%;
     display: flex;
-       /* Stack images vertically on smaller screens */
-      align-items: center; /* Center align the images */
-      justify-content: center;
-      gap: 20px;
+    align-items: center; /* Center align the images */
+    justify-content: center;
 }
 
-.image-gallery img{
-    width: auto;
-    height: 200px;
+.fancybox__container{
+  z-index: 1500 !important;
 }
 
-/* Bring all Lightgallery layers to the front */
-.lg-backdrop,
-.lg-outer,
-.lg {
-  z-index: 1500 !important; /* Ensure all modal elements stay on top */
-  position: relative;
-}
-
-/* Additional specific layering adjustments if needed */
-.lg-backdrop {
-  z-index: 1501 !important;
-}
-
-.lg-outer {
-  z-index: 1502 !important;
-}
-
-.lg-toolbar, 
-.lg-sub-html, 
-.lg-thumb-outer, 
-.lg-image {
-  z-index: 1503 !important;
-}
-
-
-.lg-image {
-    max-height: 80vh !important; 
-    object-fit: contain;
-  }
-
-  @media (max-width: 768px) {
-    .image-gallery {
-      display: flex;
-      flex-direction: column; /* Stack images vertically on smaller screens */
-      align-items: center; /* Center align the images */
-      justify-content: center;
-    }
-  
-    .image-gallery img {
-      width: 100% !important; /* Make the image take full width of container */
-      max-width: 100%; /* Ensure it doesn’t overflow */
-      height: auto; 
-     
-    }
-  }
 
 
