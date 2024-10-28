@@ -22,11 +22,13 @@ const EditCourse = () => {
     const [trainer, setTrainer] = useState(state.trainer || '');
     const [priceDetail, setPriceDetail] = useState(state.priceDetail || '');
     const [price, setPrice] = useState(state.price || 0);
-    const [hightlights, setHighlights] = useState(state.hightlights || '');
+    const [highlights, setHighlights] = useState(state.highlights || '');
+
+    const ratingValue = state.ratingValue || 3.5
   
     const navigate = useNavigate()
 
-    console.log(price)
+    
     const courseId = state.id;
 
     const handleImageUpload = (event) => {
@@ -63,7 +65,9 @@ const EditCourse = () => {
           trainer,
           priceDetail,
           price,
-          hightlights
+          highlights,
+          updatedDate: new Date().toISOString(), 
+          ratingValue
         });
         toast.success('Course updated successfully');
   
@@ -86,7 +90,7 @@ const EditCourse = () => {
       setPriceDetail(prev => prev === priceDetailValue ? '' : priceDetailValue);
    };
 
-   console.log(priceDetail)
+   
   return (
     <div className="create-course-container">
         <Toaster position="top-center" richColors/>
@@ -243,8 +247,8 @@ const EditCourse = () => {
                 <label htmlFor="topics">Highlights</label>
                 <Editor
                     className="content-editor"
-                    id="hightlights"
-                    value={hightlights}
+                    id="highlights"
+                    value={highlights}
                     onTextChange={(e) => setHighlights(e.htmlValue)} 
                     required
                     style={{ minHeight: '100px', backgroundColor: 'white' }}

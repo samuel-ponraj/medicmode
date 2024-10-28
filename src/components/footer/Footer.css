@@ -8,7 +8,8 @@
     padding: 55px 30px;
     display: flex;
     justify-content: space-evenly;
-    font-size: 15px;
+    font-size: 13px;
+    height: auto;
 }
 
 .footer-logo{
@@ -22,7 +23,7 @@
 }
 
 .footer h3{
-    font-size: 20px;
+    font-size: 18px;
     color: var(--orange);
     margin-bottom: 20px;
 }
@@ -48,6 +49,7 @@
 .footer ul li a{
     text-decoration: none;
     color: var(--light-green);
+    
 }
 
 .address{
@@ -94,6 +96,10 @@
     .address{
         display: flex;
         align-items: center;
+    }
+
+    .footer-courses h3{
+        text-align: center;
     }
 
 

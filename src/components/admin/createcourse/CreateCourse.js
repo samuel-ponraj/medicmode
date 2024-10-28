@@ -23,7 +23,8 @@ const CreateCourse = () => {
     const [trainer, setTrainer] = useState('');
     const [priceDetail, setPriceDetail] = useState('')
     const [price, setPrice] = useState(0)
-    const [hightlights, setHighlights] = useState('')
+    const [highlights, setHighlights] = useState('')
+    const ratingValue = 3.5
 
     const navigate = useNavigate();
 
@@ -54,7 +55,8 @@ const CreateCourse = () => {
             approved: 'no',
             priceDetail,
             price,
-            hightlights
+            highlights,
+            ratingValue
           });
     
           console.log('Document written with ID: ', docRef.id);
@@ -271,8 +273,8 @@ const CreateCourse = () => {
                 <label htmlFor="topics">Highlights</label>
                 <Editor
                     className="content-editor"
-                    id="hightlights"
-                    value={hightlights}
+                    id="highlights"
+                    value={highlights}
                     onTextChange={(e) => setHighlights(e.htmlValue)} 
                     required
                     style={{ minHeight: '100px', backgroundColor: 'white' }}

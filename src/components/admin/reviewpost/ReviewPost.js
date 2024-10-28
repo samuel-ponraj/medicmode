@@ -4,10 +4,10 @@ import { collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firesto
 import './ReviewPost.css';
 import { Link, Route, Routes } from 'react-router-dom';
 import EditPost from '../editpost/EditPost';
+import { GridLoader } from 'react-spinners';
 
-const ReviewPost = () => {
+const ReviewPost = ({loading,  setLoading}) => {
   const [blogPosts, setBlogPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [approvalStatus, setApprovalStatus] = useState({});
   const [approvedPosts, setApprovedPosts] = useState([]);
 
@@ -39,6 +39,7 @@ const ReviewPost = () => {
     };
 
     fetchBlogPosts();
+    // eslint-disable-next-line
   }, []);
 
   const handleApprovalChange = async (postId) => {
@@ -103,9 +104,14 @@ const ReviewPost = () => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if (loading || !blogPosts) {
+    return (
+      <div className="loading-container">
+        <GridLoader color={"#0A4044"} loading={loading} size={10} />
+      </div>
+    );
   }
+
 
  
 
@@ -138,7 +144,7 @@ const ReviewPost = () => {
                   <td>{post.coAuthor}</td>
                   <td>{post.category}</td>
                   <td>
-                    <Link to={`/blog/${post.id}`} target="_blank" rel="noopener noreferrer">
+                    <Link to={`/blog/${post.id}`} >
                       View Post
                     </Link>
                   </td>
@@ -161,7 +167,7 @@ const ReviewPost = () => {
                   </td>
                   <td>
                     {post.thumbnail ? (
-                      <Link to={post.thumbnail} target="_blank" rel="noopener noreferrer">
+                      <Link to={post.thumbnail} >
                         View Thumbnail
                       </Link>
                     ) : (

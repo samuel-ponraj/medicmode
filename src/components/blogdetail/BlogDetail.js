@@ -7,19 +7,22 @@ import SendIcon from '@mui/icons-material/Send';
 import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded';
 import { toast, Toaster } from 'sonner';
 import YouTube from 'react-youtube';
+import { GridLoader } from 'react-spinners';
+
+
 var getYouTubeID = require('get-youtube-id');
 
-const BlogDetail = ({ userEmail, handleOpen, logged }) => {
+const BlogDetail = ({ userEmail, handleOpen, logged, loading, setLoading }) => {
     const { postId } = useParams(); // Extract postId from the URL
     const location = useLocation(); // Use useLocation to access the state
     const { state } = location || {};
     const [post, setPost] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [comments, setComments] = useState([]);
     const [commentText, setCommentText] = useState('');
     const [userDetails, setUserDetails] = useState({}); // To store user details
 
     const commentSectionRef = useRef(null);
+
 
     // Fetch the blog post details
     useEffect(() => {
@@ -41,6 +44,7 @@ const BlogDetail = ({ userEmail, handleOpen, logged }) => {
         };
 
         fetchPost();
+        // eslint-disable-next-line
     }, [postId]);
 
     // Fetch comments and user details
@@ -147,23 +151,29 @@ const BlogDetail = ({ userEmail, handleOpen, logged }) => {
 
    
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-      
-    if (!post) {
-        return <div>No post found.</div>;
-    }
+    if (loading || !post) {
+        return (
+          <div className="loading-container">
+            <GridLoader color={"#0A4044"} loading={loading} size={10} />
+          </div>
+        );
+      }
+   
 
    
       
     const opts = {
-        height: '390',
-        width: '640',
         playerVars: {
           autoplay: 1,
         },
     }
+
+    function capitalizeNames(name) {
+        return name
+          .split(" ")
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(" ");
+      }
 
     return (
         <div className='blog-detail-container'>
@@ -173,23 +183,36 @@ const BlogDetail = ({ userEmail, handleOpen, logged }) => {
                     <h1>{post.title}</h1>
                 </div>
                 <div className="blog-detail-description">
-                    <h3>Author: {post.author}</h3>
-                    {post.coAuthor && post.coAuthor.trim() && post.coAuthor !== 'None' && (
-                        <h3>Co-authors: {post.coAuthor}</h3>
-                    )}
-
-                    <h3>Category: {post.category}</h3>
-                    <h3>{new Date(post.dateCreated).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                    })}</h3>
+                    <div>
+                        <h3 style={{fontWeight: 800}}>Author</h3>
+                        <h3>{capitalizeNames(post.author)}</h3>
+                    </div>
+                    <div>
+                        {post.coAuthor && post.coAuthor.trim() && post.coAuthor !== 'None' && (
+                            <>
+                            <h3 style={{fontWeight: 800}}>Co-authors</h3>
+                            <h3>{capitalizeNames(post.coAuthor)}</h3>
+                            </>
+                        )}
+                    </div>
+                    <div>
+                        <h3 style={{fontWeight: 800}}>Category</h3>
+                        <h3>{post.category}</h3>
+                    </div>
+                    <div>
+                        <h3 style={{fontWeight: 800}}>Updated on</h3>
+                        <h3>{new Date(post.dateCreated).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                        })}</h3>
+                    </div>
                 </div>
                 <hr className='separator'/>
                 <div className="blog-detail-content" dangerouslySetInnerHTML={{ __html: post.content }} />
                 {post.youtubeUrl && (
                     <div className="youtube-link">
-                        <YouTube videoId={getYouTubeID(post.youtubeUrl)} opts={opts} />
+                        <YouTube videoId={getYouTubeID(post.youtubeUrl)} opts={opts} className='youtube' />
                     </div>
                 )}
                 

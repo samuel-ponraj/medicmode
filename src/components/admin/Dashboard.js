@@ -11,8 +11,11 @@ import EditPost from './editpost/EditPost';
 import CreateCourse from './createcourse/CreateCourse';
 import ReviewCourse from './reviewcourse/ReviewCourse';
 import EditCourse from './editcourse/EditCourse'
+import Events from './events/Events';
+import ReviewEvent from './reviewevent/ReviewEvent';
+import EditEvent from './editevent/EditEvent';
 
-const Dashboard = ({userEmail}) => {
+const Dashboard = ({userEmail , loading, setLoading}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   
@@ -28,13 +31,18 @@ const Dashboard = ({userEmail}) => {
 					<Link to="users" className='hover' style={{marginTop:'10px'}} onClick={() => setSidebarOpen(false)} ><li>User List</li></Link>
 					<li className='list-heading'>Blogs</li>
 						<ul>
-							<Link className='hover' to="create-post" onClick={() => setSidebarOpen(false)} ><li>Create Post</li></Link>
-							<Link className='hover' to="review-post" onClick={() => setSidebarOpen(false)} ><li>Review Post</li></Link>	
+							<Link className='hover' to="create-post" onClick={() => setSidebarOpen(false)} ><li>New Blog</li></Link>
+							<Link className='hover' to="review-post" onClick={() => setSidebarOpen(false)} ><li>Review Blog</li></Link>	
 						</ul>
 					<li className='list-heading'>Courses</li>
 						<ul>
-							<Link className='hover' to="create-course" onClick={() => setSidebarOpen(false)} ><li>Create Course</li></Link>
+							<Link className='hover' to="create-course" onClick={() => setSidebarOpen(false)} ><li>New Course</li></Link>
 							<Link className='hover' to="review-course" onClick={() => setSidebarOpen(false)} ><li>Review Course</li></Link>
+						</ul>
+          <li className='list-heading'>Events</li>
+            <ul>
+							<Link className='hover' to="events" onClick={() => setSidebarOpen(false)} ><li>New Event</li></Link>
+              <Link className='hover' to="review-event" onClick={() => setSidebarOpen(false)} ><li>Review Event</li></Link>
 						</ul>
 				</ul>
           </div>
@@ -59,6 +67,11 @@ const Dashboard = ({userEmail}) => {
 							<Link className='hover' to="create-course" onClick={() => setSidebarOpen(false)} ><li>Create Course</li></Link>
 							<Link className='hover' to="review-course" onClick={() => setSidebarOpen(false)} ><li>Review Course</li></Link>
 						</ul>
+          <li className='list-heading'>Events</li>
+            <ul>
+							<Link className='hover' to="events" onClick={() => setSidebarOpen(false)} ><li>Create Event</li></Link>
+              <Link className='hover' to="review-event" onClick={() => setSidebarOpen(false)} ><li>Review Event</li></Link>
+						</ul>
 				</ul>
         </div>
         <div className="admin-main">
@@ -72,13 +85,16 @@ const Dashboard = ({userEmail}) => {
           <Routes>
             <Route path="/" element={<Navigate to="review-post" replace />} />
             <Route path="create-post" element={<CreatePost userEmail={userEmail}/>} />
-            <Route path="review-post" element={<ReviewPost />} />
+            <Route path="review-post" element={<ReviewPost  loading={loading} setLoading={setLoading}/>} />
 			      <Route path="create-course" element={<CreateCourse />} />
-            <Route path="review-course" element={<ReviewCourse />} />
+            <Route path="review-course" element={<ReviewCourse loading={loading} setLoading={setLoading}/>} />
             <Route path="review-post/edit-post" element={<EditPost />} />
             <Route path="review-course/edit-course" element={<EditCourse />} />
             <Route path="review-post/:postId" element={<BlogDetail />} />
-            <Route path="users" element={<UserTable />} />
+            <Route path="users" element={<UserTable loading={loading} setLoading={setLoading}/>} />
+            <Route path="events" element={<Events loading={loading} setLoading={setLoading}/>} />
+            <Route path="review-event" element={<ReviewEvent loading={loading} setLoading={setLoading}/>} />
+            <Route path="review-event/edit-event" element={<EditEvent />} />
           </Routes>
         </div>
       </div>

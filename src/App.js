@@ -6,7 +6,6 @@ import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import About from './components/about/About';
 import Courses from './components/courses/Courses';
-// import Drawer from './components/admin/Drawer'
 import Careers from './components/careers/Careers';
 import Contact from './components/contact/Contact';
 import Blogs from './components/blogs/Blogs';
@@ -47,6 +46,7 @@ function App() {
     const [logged, setLogged] = useState(false);
     const [error, setError] = useState('');
     const [userEmail, setUserEmail] = useState(''); 
+    const [loading, setLoading] = useState(true);
 
     const style = {
         position: 'fixed',
@@ -105,20 +105,21 @@ function App() {
                     <Header handleOpen={handleOpen} logged={logged} handleLogout={handleLogout} userEmail={userEmail} />
                 </header>
                 <main className="main-content">
+                    
                 <Routes> 
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
-                    <Route path="/courses" element={<Courses />} />
-                    <Route path="/courses/:courseId" element={<CourseDetail userEmail={userEmail} handleOpen={handleOpen} logged={logged}/>} />
-                    <Route path="/blog/" element={<Blogs userEmail={userEmail} logged={logged} handleOpen={handleOpen}/>} />
+                    <Route path="/courses" element={<Courses  logged={logged}/>} />
+                    <Route path="/courses/:courseId" element={<CourseDetail userEmail={userEmail} handleOpen={handleOpen} logged={logged} />} />
+                    <Route path="/blog/" element={<Blogs userEmail={userEmail} logged={logged} handleOpen={handleOpen} />} />
                     <Route path="/blog/create-post" element={
                         <ProtectedRoute 
                         element={ <CreatePost />} logged={logged} userEmail={userEmail}>                                       
                          </ProtectedRoute>} />
-                    <Route path="/careers" element={<Careers />} />
+                    <Route path="/careers" element={<Careers setLoading={setLoading}/>} />
                     <Route path="/contact" element={<Contact />} />
-                    <Route path="/dashboard/*" element={<ProtectedRoute element={<Dashboard />} logged={logged} userEmail={userEmail} />} />
-                    <Route path="/blog/:postId" element={<BlogDetail userEmail={userEmail} handleOpen={handleOpen} logged={logged}/>} />
+                    <Route path="/dashboard/*" element={<ProtectedRoute element={<Dashboard  loading={loading} setLoading={setLoading}/>} logged={logged} userEmail={userEmail} />} />
+                    <Route path="/blog/:postId" element={<BlogDetail userEmail={userEmail} handleOpen={handleOpen} logged={logged} loading={loading} setLoading={setLoading}/>} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                     
@@ -127,7 +128,15 @@ function App() {
                     <Footer />
                 </footer>
                 <div className="float">
-                    <WhatsAppIcon style={{ fontSize: '25px', color: 'white' }} />
+                    <a
+                        href="https://wa.me/919008761372"
+                        className="whatsapp-float"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Chat with us on WhatsApp"
+                    >
+                        <WhatsAppIcon style={{ fontSize: '25px', color: 'white' }} />
+                    </a>
                 </div>
                 <Modal
                     open={open}

@@ -17,6 +17,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { toast, Toaster } from 'sonner';
 import { RWebShare } from "react-web-share";
 import { Button } from '@mui/material';
+import { GridLoader } from 'react-spinners';
 
 const Blog = ({userEmail, logged , handleOpen}) => {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -28,6 +29,8 @@ const Blog = ({userEmail, logged , handleOpen}) => {
   const [selectedMonth, setSelectedMonth] = useState('');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [likedPosts, setLikedPosts] = useState(new Set());
+  const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -80,12 +83,17 @@ const Blog = ({userEmail, logged , handleOpen}) => {
       } catch (error) {
         console.error("Error fetching blogs: ", error);
       }
+     finally {
+      setLoading(false); 
+    }
     };
 
-    
   
     fetchBlogs();
-  }, []); 
+  }, [setLoading]); 
+
+
+
   
   // Separate useEffect for checking likes
   useEffect(() => {
@@ -106,6 +114,9 @@ const Blog = ({userEmail, logged , handleOpen}) => {
   
     checkLikes();
   }, [userEmail, blogPosts]); 
+
+
+  
 
 
   const filteredBlogs = blogPosts.filter(blog => {
@@ -189,6 +200,15 @@ const Blog = ({userEmail, logged , handleOpen}) => {
     AOS.init({duration: 1000})
   }, [])
 
+  if (loading || !blogPosts) {
+    return (
+      <div className="loading-container">
+        <GridLoader color={"#0A4044"} loading={loading} size={10} />
+      </div>
+    );
+  }
+ 
+
   return (
 
     <div className="blogs">
@@ -223,7 +243,7 @@ const Blog = ({userEmail, logged , handleOpen}) => {
           
           <div className="primary-blog" data-aos='fade-up'>
             <div className="blog-image-container">
-              <Link to={`/blog/${recentBlog.id}`} target="_blank" rel="noopener noreferrer">
+              <Link to={`/blog/${recentBlog.id}`} >
                 <img src={recentBlog.thumbnail} alt={recentBlog.title} />
                 
               </Link>
@@ -238,7 +258,7 @@ const Blog = ({userEmail, logged , handleOpen}) => {
                 <p>{recentBlog.category.toUpperCase()}</p>
               </div>
               <div className="title">
-                <Link to={`/blog/${recentBlog.id}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                <Link to={`/blog/${recentBlog.id}`} style={{ textDecoration: 'none' }}>
                   <h2>{recentBlog.title}</h2>
                 </Link>
               </div>
@@ -252,6 +272,7 @@ const Blog = ({userEmail, logged , handleOpen}) => {
 							border: 'none',
 							cursor: 'pointer',
 							padding: '0',
+              marginRight:'5px'
 						}} 
 						sx={{ color: 'red'}} // Change color for liked state
 					/> 
@@ -263,7 +284,8 @@ const Blog = ({userEmail, logged , handleOpen}) => {
               border: 'none',
               cursor: 'pointer',
               padding: '0',
-              transition: 'transform 0.2s ease', // Smooth transition
+              transition: 'transform 0.2s ease', 
+              marginRight:'5px',
               '&:hover': {
                 transform: 'scale(1.1)', // Zoom effect on hover
               },
@@ -273,7 +295,7 @@ const Blog = ({userEmail, logged , handleOpen}) => {
 				)} <span>{recentBlog.likesCount > 0 ? `${recentBlog.likesCount} Likes` : 'Like'}</span>
         
               <div  onClick={() => {handleCommentIconClick(recentBlog.id)}} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center'}}>
-              <ChatBubbleOutlineIcon style={{ marginLeft: '20px' }} /> 
+              <ChatBubbleOutlineIcon style={{ marginLeft: '20px', marginRight:'5px' }} /> 
               <span> {recentBlog.commentsCount > 0 ? `${recentBlog.commentsCount} Comments` : 'Comment'}</span>
               </div>
               <RWebShare
@@ -293,7 +315,9 @@ const Blog = ({userEmail, logged , handleOpen}) => {
             </div>
           </div>
         ) : (
-          <p>Loading...</p>
+          <div className="loading-container">
+            <GridLoader color={"#0A4044"} loading={loading} size={10} />
+          </div>
         )}
 
         <div className={`blog-options ${isDrawerOpen ? 'open' : ''}`}>
@@ -358,7 +382,7 @@ const Blog = ({userEmail, logged , handleOpen}) => {
           otherBlogs.map(blog => (
             <div key={blog.id} className="other-blogs" data-aos='zoom-in'>
               <div className="blog-image-container">
-                <Link to={`/blog/${blog.id}`} target="_blank" rel="noopener noreferrer" >
+                <Link to={`/blog/${blog.id}`} >
                   <img src={blog.thumbnail} alt={blog.title} />
                 </Link>
               </div>
@@ -372,7 +396,7 @@ const Blog = ({userEmail, logged , handleOpen}) => {
                   <p>{blog.category.toUpperCase()}</p>
                 </div>
                 <div className="title">
-                  <Link to={`/blog/${blog.id}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                  <Link to={`/blog/${blog.id}`} style={{ textDecoration: 'none' }}>
                     <h2>{blog.title}</h2>
                   </Link>
                 </div>
@@ -386,6 +410,7 @@ const Blog = ({userEmail, logged , handleOpen}) => {
 							border: 'none',
 							cursor: 'pointer',
 							padding: '0',
+              marginRight:'5px'
 						}} 
 						sx={{ color: 'red' }} // Change color for liked state
 					/>
@@ -397,6 +422,7 @@ const Blog = ({userEmail, logged , handleOpen}) => {
               border: 'none',
               cursor: 'pointer',
               padding: '0',
+              marginRight:'5px',
               transition: 'transform 0.2s ease', // Smooth transition
               '&:hover': {
                 transform: 'scale(1.1)', // Zoom effect on hover
@@ -406,7 +432,7 @@ const Blog = ({userEmail, logged , handleOpen}) => {
 					/>
 				)} <span>{blog.likesCount > 0 ? `${blog.likesCount} Likes` : 'Like'}</span>
                 <div  onClick={() => {handleCommentIconClick(blog.id)}} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center'}}>
-              <ChatBubbleOutlineIcon style={{ marginLeft: '20px' }} /> 
+              <ChatBubbleOutlineIcon style={{ marginLeft: '20px',marginRight:'5px' }} /> 
               <span>{blog.commentsCount > 0 ? `${blog.commentsCount} Comments` : 'Comment'}</span>
               </div> 
                 <RWebShare
@@ -414,7 +440,6 @@ const Blog = ({userEmail, logged , handleOpen}) => {
                     text: "Medic Modec - A Gazette for Emergency Medical Professionals",
                     url: `https://medicmode.vercel.app/blog/${blog.id}`,
                     title: "Medic Mode",
-                    image: blog.thumbnail 
                   }}
                   onClick={() => toast.success('Shared successfully!', {
                     duration: 3000 

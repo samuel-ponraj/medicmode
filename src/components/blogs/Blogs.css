@@ -76,7 +76,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 20px;
+    padding: 5px 20px;
     color: var(--light-green);
     position: absolute;
     bottom: 0;
@@ -130,7 +130,7 @@
     padding: 20px ;
     background-color: #f9f9f9;
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
     margin: 20px ;
     background-color: var(--light-green);
    
@@ -159,6 +159,7 @@
     padding: 10px;
     border: none;
     border-radius: 10px;
+    background-color: white;
 }
 
 .user-create-blog{
@@ -172,25 +173,38 @@
     color: var(--dark-green);
     text-transform: none;
     letter-spacing: normal;
-    font-size: 19px;
+    font-size: 18px;
     padding: 0;
     margin-bottom: 10px;
 }
 
-.create-user-blog-btn{
+.create-user-blog-btn {
     background-color: var(--dark-green) !important;
     color: var(--light-green) !important;
     padding: 10px 20px !important;
     font-size: 13px;
-    margin-top: 5px;
+    margin-top: 10px !important;
     border: none;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; /* Default shadow */
     border-radius: 25px !important;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease; /* Added transition for shadow and transform */
+    cursor: pointer; /* Ensure the cursor changes to pointer */
 }
+
+/* Hover effect */
 .create-user-blog-btn:hover {
-    color: var(--orange) !important; /* Change text color on hover */
+    background-color: var(--orange) !important; 
+    box-shadow: rgba(0, 0, 0, 0.25) 2px 2px 3px; /* Enhance shadow on hover */
 }
+
+/* Active (click) effect */
+.create-user-blog-btn:active {
+    transform: translateY(2px); /* Move button down when clicked */
+    box-shadow: rgba(0, 0, 0, 0.1) 1.5px 1.5px 2px; /* Reduce shadow on click */
+    background-color: var(--dark-green) !important; /* Keep original color on click */
+}
+
+
 
 .secondary {
     grid-column: 1 / -1;
@@ -367,8 +381,6 @@
             padding-left: 10px !important;
             margin: 0 !important;
             font-size: 16px !important;
-            font-family: "Titillium", sans-serif !important;
-        
     }
 }
 

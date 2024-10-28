@@ -46,6 +46,7 @@
     margin: 0 10px;
     border: none;
     color: gray;
+    background-color: white;
 }
 
 
@@ -110,6 +111,7 @@
     justify-content: space-between;
     color: var(--grey);
     font-size: 13px;
+    margin-bottom: 8px;
 }
 
 .duration{
@@ -141,36 +143,73 @@ margin: 20px 0;
 
 .trainers-container {
     display: flex;
-    justify-content: space-around;  /* Distribute the trainers evenly */
-    flex-wrap: wrap;                /* Allow trainers to wrap to the next line */
-    gap: 20px;                      /* Add some space between the trainers */
+    flex-direction: column;
     margin: 40px 0;
     padding: 10px;
 }
 
+.trainers-row {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 50px 0;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
 .trainer {
-    text-align: center;             /* Center-align the text */
-    max-width: 200px;               /* Set a maximum width for each trainer card */
+    text-align: center;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .trainer-image {
-    width: 150px;                   /* Set the image size */
-    height: 150px;
-    border-radius: 50%;             /* Make the image round */
-    object-fit: cover;              /* Ensure the image covers the entire container */
-    border: 2px solid #ccc;         /* Optional: add a border around the image */
-    margin-bottom: 10px;            /* Add space between the image and the name */
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    margin-bottom: 10px;
 }
 
 .trainer h3 {
-    font-size: 18px;                /* Adjust the size of the name */
+    font-size: 20px;
     margin: 10px 0 5px 0;
+    color: var(--dark-green);
 }
 
-.trainer p {
-    font-size: 14px;                /* Adjust the size of the designation */
-    color: #666;
+@media (max-width: 768px) {
+    .trainer-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .trainer h3 {
+        font-size: 16px;
+    }
+
+    .trainers-row {
+        justify-content: space-evenly;
+        margin: 0;
+    }
 }
+
+@media (max-width: 480px) {
+    .trainer-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .trainer h3 {
+        font-size: 14px;
+    }
+
+    .trainers-row {
+        margin-bottom: 60px;
+    }
+}
+
 
 .show-more-button{
     display: block; 
@@ -223,10 +262,6 @@ margin: 20px 0;
         font-size: 15px;
     }
 
-    .trainers-container{
-        align-items: center;
-        flex-direction: column;
-    }
 
     .course-list-wrapper{
         gap: 0;

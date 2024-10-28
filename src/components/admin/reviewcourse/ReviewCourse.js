@@ -4,11 +4,11 @@ import { Link, Route, Routes } from 'react-router-dom'
 import EditCourse from '../editcourse/EditCourse'
 import { db } from '../../../firebase'; // Adjust the path as necessary
 import { collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { GridLoader } from 'react-spinners';
 
-const ReviewCourse = () => {
+const ReviewCourse = ({loading, setLoading}) => {
 
     const [courses, setCourses] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [approvalStatus, setApprovalStatus] = useState({});
     const [approvedCourses, setApprovedCourses] = useState([]);
 
@@ -40,6 +40,7 @@ const ReviewCourse = () => {
         };
     
         fetchCourses();
+        // eslint-disable-next-line
       }, []);
 
     const handleApprovalChange = async (courseId) => {
@@ -106,9 +107,14 @@ const ReviewCourse = () => {
         }
       };
     
-      if (loading) {
-        return <div>Loading...</div>;
-      }
+      
+if (loading) {
+  return (
+    <div className="loading-container">
+      <GridLoader color={"#0A4044"} loading={loading} size={10} />
+    </div>
+  );
+}
 
       
   return (
@@ -137,11 +143,11 @@ const ReviewCourse = () => {
                   <td>{formatDate(course.dateCreated)}</td>
                   <td>{course.courseTitle}</td>
                   <td>{course.mode}</td>
-                  <td>{course.audience}</td>
+                  <td>{course.audience.join(', ')}</td>
                   <td>{course.priceDetail}</td>
                   <td>{course.price === 0 ? '-' : `Rs. ${course.price}`}</td>
                   <td>
-                    <Link to={`/courses/${course.id}`} target="_blank" rel="noopener noreferrer">
+                    <Link to={`/courses/${course.id}`} >
                       View course
                     </Link>
                   </td>
@@ -157,6 +163,7 @@ const ReviewCourse = () => {
                             price: course.price,
                             priceDetail: course.priceDetail,
                             trainer: course.trainer,
+                            highlights:course.highlights,
                             courseDescription: course.courseDescription}}>
                     Edit Course
                   </Link>
@@ -164,7 +171,7 @@ const ReviewCourse = () => {
                   </td>
                   <td>
                     {course.thumbnail ? (
-                      <Link to={course.thumbnail} target="_blank" rel="noopener noreferrer">
+                      <Link to={course.thumbnail} >
                         View Thumbnail
                       </Link>
                     ) : (

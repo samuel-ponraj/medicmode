@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../../../firebase'; // Adjust the path as necessary
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'; // Firestore functions
 import './UserTable.css'; 
+import ClipLoader from "react-spinners/ClipLoader"; 
 
-const UserTable = () => {
+const UserTable = ({loading, setLoading}) => {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -24,6 +24,7 @@ const UserTable = () => {
     };
 
     fetchUsers();
+    // eslint-disable-next-line
   }, []);
 
   const handleDelete = async (userId) => {
@@ -53,7 +54,11 @@ const UserTable = () => {
 
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading-container">
+        <ClipLoader color={"#0A4044"} loading={loading} size={50} />
+      </div>
+    );
   }
 
   return (

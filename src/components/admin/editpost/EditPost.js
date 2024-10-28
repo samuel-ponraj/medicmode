@@ -57,16 +57,18 @@ const EditPost = () => {
         reference,
         thumbnail: thumbnail || state.thumbnail, 
         approved: 'no',
-        youtubeUrl
+        youtubeUrl,
+        updatedDate: new Date().toISOString()
       });
       toast.success('Post updated successfully');
-
       navigate('/dashboard')
     } catch (error) {
       toast.error('Error updating post');
       console.error('Error updating post:', error);
     }
   };
+
+  
 
   return (
     <div className="create-post-container">
@@ -116,6 +118,13 @@ const EditPost = () => {
             <option value="Case Study">Case Study</option>
             <option value="Opinion Piece">Opinion Piece</option>
             <option value="Review">Review</option>
+            <option value="CPR and First Aid">CPR and First Aid</option>
+            <option value="Emergency Medical Services">Emergency Medical Services</option>
+            <option value="EMS Wall of Fame">EMS Wall of Fame</option>
+            <option value="Medicmode Events">Medicmode Events</option>
+            <option value="Medicmode PPT">Medicmode PPT</option>
+            <option value="Medicmode Protocols">Medicmode Protocols</option>
+            <option value="Research">Research</option>
           </select>
         </div>
 

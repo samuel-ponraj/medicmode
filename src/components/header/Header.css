@@ -55,8 +55,8 @@
   
   .nav-list ul li {
     margin: 0 5px;
-    padding: 13px;
-    font-size: 15px;
+    padding: 11px;
+    font-size: 14px;
     box-sizing: border-box; 
     transition: transform 0.3s ease; 
     font-weight: 600;
@@ -70,23 +70,36 @@
     /* background-color: var(--light-green); */
     color: var(--orange);
     cursor: pointer;
-    padding: 13px;
+    padding: 11px;
     border-radius: 10px;
     transform: scale(1.1);
   }
   
-  .login-register-btn{
-    color:  var(--dark-green);
+  .login-register-btn {
+    color: var(--dark-green);
     background-color: var(--light-green);
     padding: 10px 30px;
-    font-size: 15px;
+    font-size: 13px;
     border: none;
     margin-left: 20px;
     cursor: pointer;
     border-radius: 50px;
     width: auto;
     font-weight: 600;
-  }
+    transition: all 0.3s ease; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+}
+
+.login-register-btn:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
+    transform: translateY(-2px); 
+}
+
+.login-register-btn:active {
+    transform: translateY(0); 
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
   
   .menu-icon{
     display: none;
@@ -100,31 +113,34 @@
   @media (max-width: 1024px) {
     .nav-list {
       position: absolute;
-      top: 70px; /* Adjust for navbar height */
-      right: 0;
-      width: 100%;
+      top: 70px; /* Start 70px from the top */
+      right: 0; /* Align to the right side */
+      width: 50%; /* Half the width of the screen */
+      height: calc(100vh - 70px); /* Full height minus the top offset */
       background-color: var(--dark-green);
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       padding: 10px;
-      opacity: 0;     /* Start with opacity 0 */
-      transform: translateY(-50px);  /* Start off-screen (above) */
-      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+      opacity: 0;
+      transform: translateX(100%); /* Start completely off-screen to the right */
+      transition: opacity 0.3s ease, transform 0.4s ease, visibility 0s 0.4s;
       visibility: hidden; /* Hide the menu initially */
-      border-radius: 0 0 20px 20px; 
-    }
-    
-    
-    .nav-list.active {
-      opacity: 1;     /* Fully visible */
-      transform: translateY(0);  /* Slide into position */
-      visibility: visible; /* Make the menu visible */
-      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
-    }
+      
+  }
+  
+  .nav-list.active {
+      opacity: 0.95; 
+      transform: translateX(0); /* Slide in to its original position */
+      visibility: visible; 
+      transition: opacity 0.3s ease, transform 0.4s ease, visibility 0s;
+  }
+  
+
 
     .nav-images{
       gap: 10px;
+      margin-top: 5px;
     }
 
     .login-register-btn{
@@ -132,10 +148,12 @@
       margin-top: 0 !important; 
       margin: 0 auto !important;
       font-weight: 600;
+      padding: 10px 15px;
+      margin-left: 13px !important;
     }
 
     .navbar{
-      padding: 20px;  
+      padding: 15px;  
       height: 70px;
     }
   
@@ -150,25 +168,19 @@
       margin-bottom: 20px;
     }
 
-
   
     .nav-list ul li {
       text-align: left;
+      margin-bottom: 5px;
       padding-left: 20px;
       font-size: 15px;
     }
   
     /* Show menu icon on mobile */
     .menu-icon {
-      display: block;  /* Show hamburger on mobile */
-      font-size: 30px; 
+      display: block;  
     }
   
-    .login-register-btn{
-      margin-left: 0;
-      margin-top: 10px;
-      padding: 10px 20px;
-    }
     
   }
   

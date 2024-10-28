@@ -5,11 +5,9 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-
+import Hamburger from 'hamburger-react'
 
 
 const Header = ({ handleOpen, logged, handleLogout, userEmail }) => {
@@ -32,11 +30,11 @@ const Header = ({ handleOpen, logged, handleLogout, userEmail }) => {
             <div className={`nav-list ${isMenuOpen ? 'active' : ''}`}>
               <ul>
                 <Link to="/" onClick={() => setIsMenuOpen(false)}><li>HOME</li></Link>
-                <Link to="/about" onClick={() => setIsMenuOpen(false)}><li>ABOUT</li></Link>
+                <Link to="/about" onClick={() => setIsMenuOpen(false)}><li>ABOUT US</li></Link>
                 <Link to="/courses" onClick={() => setIsMenuOpen(false)}><li>COURSES</li></Link>
                 <Link to="/blog" onClick={() => setIsMenuOpen(false)}><li>BLOGS</li></Link>
                 <Link to="/careers" onClick={() => setIsMenuOpen(false)}><li>CAREERS</li></Link>
-                <Link to="/contact" onClick={() => setIsMenuOpen(false)}><li>CONTACT</li></Link>
+                <Link to="/contact" onClick={() => setIsMenuOpen(false)}><li>CONTACT US</li></Link>
                 {userEmail === 'admin@medicmode.com' && 
                 <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}><li>DASHBOARD</li></Link>}
               </ul>
@@ -46,8 +44,8 @@ const Header = ({ handleOpen, logged, handleLogout, userEmail }) => {
               : <button className='login-register-btn' onClick={handleOpen} >LOGIN</button>}
             </div>
           </div>
-          <div className="menu-icon" onClick={toggleMenu}>
-              {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          <div className="menu-icon">
+            <Hamburger toggled={isMenuOpen} toggle={toggleMenu} rounded  hideOutline={false} size={25}/>
           </div>
           
     </div>
