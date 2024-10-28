@@ -19,3 +19,34 @@ body {
     overflow-x: hidden; 
     background-color: var(--background-color);
 }
+
+/* For WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 8px; /* Reduced scrollbar width */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #e0e0e0; /* Light grey track color */
+    border-radius: 8px; /* Rounded corners for the track */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #bfbfbf; /* Light grey thumb color */
+    border-radius: 8px;        /* Rounded corners for the thumb */
+    border: 2px solid #e0e0e0; /* Adds padding with a border */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #a9a9a9; /* Darker grey on hover */
+  }
+  
+  ::-webkit-scrollbar-button {
+    display: none; /* Hide default scrollbar arrows */
+  }
+  
+  /* For Firefox */
+  * {
+    scrollbar-width: thin;             /* Thin scrollbar width */
+    scrollbar-color: #bfbfbf #e0e0e0; /* Light grey thumb and track color */
+  }
+  

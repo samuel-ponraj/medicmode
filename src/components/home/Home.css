@@ -65,16 +65,22 @@
   }
 
   .explore-btn{
-    margin: 20px 10px 0 0 ;
-    color:  var(--light-green);
-    background-color: var(--dark-green);
-    padding: 10px 20px;
-    font-size: 18px;
+    background-color: var(--dark-green) !important;
+    color: var(--light-green) !important;
+    padding: 10px 20px !important;
+    font-size: 15px;
+    margin-top: 10px !important;
     border: none;
-    margin-left: 20px;
-    cursor: pointer;
-    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; /* Default shadow */
+    border-radius: 25px !important;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease; /* Added transition for shadow and transform */
+    cursor: pointer; /* Ensure the cursor changes to pointer */
   }
+
+  .explore-btn:hover {
+    background-color: var(--orange) !important; 
+    box-shadow: rgba(0, 0, 0, 0.25) 2px 2px 3px; /* Enhance shadow on hover */
+}
 
   /* *********Services*********** */
 
@@ -84,7 +90,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 70px 20px;
+  padding: 120px 20px 50px 20px;
   text-align: center;
   width: 100%;
 }
@@ -179,6 +185,7 @@
 /* *********Services*********** */
 
 .events-container{
+ 
   padding: 50px 20px;
   color: var(--dark-green);
 }
@@ -190,12 +197,26 @@
 }
 
 
+.gallery-container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.gallery-container h1{
+  font-size: 35px;
+  color: var(--dark-green);
+  margin-bottom: 40px;
+}
+
 
 @media (max-width: 768px) {
   
     .statistics {
         flex-wrap: wrap;
-        margin: 50px 30px;
+        margin:  30px;
         text-align: center;
     }
 
@@ -210,7 +231,7 @@
     }
 
     .services-container{
-      padding: 50px 20px;
+      padding: 100px 20px 30px 20px;
     }
 
     .services-container p{

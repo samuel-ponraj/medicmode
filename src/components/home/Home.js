@@ -8,7 +8,6 @@ import 'swiper/css';  // Core Swiper styles
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';  
 import 'swiper/css/navigation';  
 import 'swiper/css/pagination';  
-import { Link } from 'react-router-dom';
 import CountUp from 'react-countup';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import SchoolIcon from '@mui/icons-material/School';
@@ -25,6 +24,10 @@ import {
   import { FaCalendarAlt } from "react-icons/fa";
   import { db } from '../../firebase'; // Make sure this path is correct
 import { collection, getDocs } from 'firebase/firestore';
+import { HashLink } from 'react-router-hash-link';
+import ImageGrid from './gallery/ImageGrid';
+
+
 
 const Home = () => {
 
@@ -95,12 +98,14 @@ const Home = () => {
       </div>
       <div className="intro-text">
         <h1>Welcome to Medic <span style={{color: 'var(--orange)'}}>Mode</span></h1>
-        <Link to="/blog" ><button className='explore-btn'>Explore more</button></Link>
+        <HashLink smooth to="#services">
+          <button className="explore-btn">Explore more</button>
+        </HashLink>
       </div>
 
 {/* ***************** Services *********************/}
 
-      <div className="services-container">
+      <div className="services-container" id='services'>
 		    <h1>Why Choose <span style={{color:'var(--orange)'}}>M</span>edic<span style={{color:'var(--orange)'}}>M</span>ode?</h1>
 			<p style={{width:'60%'}}>We provide expert paramedic services, led by certified professionals with a proven record in clinical governance, ensuring adherence to international standards.</p>
 			<div style={{display:'flex', alignItems:'center'}} className='services-content'>
@@ -215,6 +220,14 @@ const Home = () => {
           </div>
         )
       ))}
+
+{/* ***************** Gallery *********************/}
+
+      <div className="gallery-container">
+        <h1>Gallery</h1>
+          <ImageGrid />
+      </div>
+
 
     </div>
   );
