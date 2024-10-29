@@ -1,14 +1,33 @@
-// ImageGrid.js
-import React, { useEffect } from 'react';
-import './ImageGrid.css'
+import React, { useEffect, useState } from 'react';
+import './ImageGrid.css';
 import { Fancybox } from '@fancyapps/ui';
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
-
+import { db } from '../../../firebase'; // Import your Firebase configuration
+import { collection, getDocs } from 'firebase/firestore';
 
 const ImageGrid = () => {
+  const [images, setImages] = useState([]);
+
   useEffect(() => {
-    // Initialize Fancybox on component mount
-    Fancybox.bind('[data-fancybox]', {
+    // Fetch images from Firestore on component mount
+    const fetchImages = async () => {
+      try {
+        const galleryRef = collection(db, 'gallery'); // Reference to the 'gallery' collection
+        const gallerySnapshot = await getDocs(galleryRef); // Get all documents in the collection
+        const imagesArray = gallerySnapshot.docs.map(doc => ({
+          id: doc.id, // Use Firestore document ID as the key
+          ...doc.data() // Spread the document data
+        }));
+        setImages(imagesArray); // Set the images state with fetched data
+      } catch (error) {
+        console.error("Error fetching images from Firestore: ", error);
+      }
+    };
+
+    fetchImages(); // Call the fetch function
+
+    // Initialize Fancybox
+    Fancybox.bind('[data-fancybox="gallery"]', {
       Carousel: {
         infinite: false,
       },
@@ -20,30 +39,39 @@ const ImageGrid = () => {
     };
   }, []);
 
-  const images = [
-    { id: 1, src: 'https://lipsum.app/id/60/1600x1200', thumb: 'https://lipsum.app/id/60/200x150' },
-    { id: 2, src: 'https://lipsum.app/id/61/1600x1200', thumb: 'https://lipsum.app/id/61/200x150' },
-    { id: 3, src: 'https://lipsum.app/id/62/1600x1200', thumb: 'https://lipsum.app/id/62/200x150' },
-    { id: 4, src: 'https://lipsum.app/id/63/1600x1200', thumb: 'https://lipsum.app/id/63/200x150' },
-    { id: 5, src: 'https://lipsum.app/id/64/1600x1200', thumb: 'https://lipsum.app/id/64/200x150' },
-    { id: 5, src: 'https://lipsum.app/id/64/1600x1200', thumb: 'https://lipsum.app/id/64/200x150' },
-    { id: 5, src: 'https://lipsum.app/id/64/1600x1200', thumb: 'https://lipsum.app/id/64/200x150' },
-    { id: 5, src: 'https://lipsum.app/id/64/1600x1200', thumb: 'https://lipsum.app/id/64/200x150' },
-    { id: 5, src: 'https://lipsum.app/id/64/1600x1200', thumb: 'https://lipsum.app/id/64/200x150' },
-  ];
-
   return (
-    <div className='image-gallery' style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+    <div
+      className="image-gallery"
+      style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
+    >
       {images.map((image) => (
-        <a key={image.id} data-fancybox="gallery" href={image.src}>
-          <img
-            alt=""
-            src={image.thumb}
-            width="350"
-            height="auto"
-            style={{ margin: '5px', borderRadius: '5px' }}
-          />
-        </a>
+        <div key={image.id}  className="image-wrapper">
+          
+          <a
+            data-fancybox="gallery"
+            href={image.carouselImages[0]} // First image in the carousel
+            data-caption={image.caption}
+          >
+            <img
+              alt=""
+              src={image.thumbnail} 
+              className="gallery-thumbnail"
+            />
+          </a>
+          <div className="gallery-caption">
+            {image.caption}
+          </div>
+          {image.carouselImages.slice(1).map((carouselImage, index) => (
+            // eslint-disable-next-line
+            <a
+              key={index}
+              data-fancybox="gallery"
+              href={carouselImage} // Remaining carousel images
+              style={{ display: 'none' }} // Hidden for Fancybox
+              data-caption={image.caption}
+            />
+          ))}
+        </div>
       ))}
     </div>
   );

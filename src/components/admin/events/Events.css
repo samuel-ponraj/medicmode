@@ -42,12 +42,12 @@
 
 @media (max-width: 768px){
 
-    .create-post-container{
+    .create-events-container{
         width: 99%;
     }
 
-    .create-post-container form{
-        padding: 30px 15px;
+    .create-events-container form{
+        padding: 30px 0 !important;
     }
 
 }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-import bg1 from '../../assets/bg1.jpg';
-import bg2 from '../../assets/bg2.jpg';
-import bg3 from '../../assets/bg3.jpg';
+import bg1 from '../../assets/home/bg1.jpg';
+import bg2 from '../../assets/home/bg2.jpg';
+import bg3 from '../../assets/home/bg3.jpg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';  // Core Swiper styles
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';  
@@ -26,10 +26,14 @@ import {
 import { collection, getDocs } from 'firebase/firestore';
 import { HashLink } from 'react-router-hash-link';
 import ImageGrid from './gallery/ImageGrid';
-
+import Aos from 'aos';
 
 
 const Home = () => {
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
 
   const [events, setEvents] = useState([]);
   
@@ -86,7 +90,7 @@ const Home = () => {
           navigation
           pagination={{ clickable: true }}
           autoplay={{
-            delay: 2000,
+            delay: 3000,
             disableOnInteraction: false,
           }}
           modules={[Autoplay, Navigation, Pagination]} 
@@ -106,11 +110,11 @@ const Home = () => {
 {/* ***************** Services *********************/}
 
       <div className="services-container" id='services'>
-		    <h1>Why Choose <span style={{color:'var(--orange)'}}>M</span>edic<span style={{color:'var(--orange)'}}>M</span>ode?</h1>
+		    <h1 >Why Choose <span style={{color:'var(--orange)'}}>M</span>edic<span style={{color:'var(--orange)'}}>M</span>ode?</h1>
 			<p style={{width:'60%'}}>We provide expert paramedic services, led by certified professionals with a proven record in clinical governance, ensuring adherence to international standards.</p>
 			<div style={{display:'flex', alignItems:'center'}} className='services-content'>
         <div className="services services-col1" >
-			<div className="service">
+			<div className="service" data-aos="fade-right">
 				<div>
 				<img src={placeholder} alt="" />
 				</div>
@@ -120,7 +124,7 @@ const Home = () => {
 				</div>
 			</div>
 			
-			<div className="service">
+			<div className="service" data-aos="fade-right">
 				<div>
 				<img src={placeholder} alt="" /> {/* Add your placeholder image here */}
 				</div>
@@ -130,7 +134,7 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className="service">
+			<div className="service" data-aos="fade-right">
 				<div>
 				<img src={placeholder} alt="" /> {/* Add your placeholder image here */}
 				</div>
@@ -140,7 +144,7 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className="service">
+			<div className="service" data-aos="fade-right">
 				<div>
 				<img src={placeholder} alt="" /> {/* Add your placeholder image here */}
 				</div>
@@ -151,7 +155,7 @@ const Home = () => {
 			</div>
 			</div>
 			<div className='services-col2'>
-				<img src={doctor} alt="" />
+				<img src={doctor} alt="" data-aos="zoom-in"/>
 			</div>
 			</div>
       </div>

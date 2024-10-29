@@ -31,11 +31,16 @@ import SanthoshRavi from '../../assets/faculties/Santhosh Ravi.jpg';
 import RoginiPriya from '../../assets/faculties/Roginippriya.jpg';
 import Thamaraiselvam from '../../assets/faculties/Thamaraiselvam.jpg'
 import Ishan from '../../assets/faculties/Ishan.jpg'
+import Manoj from '../../assets/faculties/Manoj.jpg'
 
 const Courses = ({ logged }) => {
 
+
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+  
+  useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
@@ -122,7 +127,8 @@ const Courses = ({ logged }) => {
     Ishan,
     SanthoshRavi,
     RoginiPriya,
-    Thamaraiselvam
+    Thamaraiselvam,
+    Manoj
   ];
   
   const facultyNames = [
@@ -138,7 +144,8 @@ const Courses = ({ logged }) => {
     'Ishan',
     'Santhosh Ravi',
     'Rogini Priya',
-    'Thamaraiselvam '
+    'Thamaraiselvam',
+    'Manoj'
   ];
 
   return (

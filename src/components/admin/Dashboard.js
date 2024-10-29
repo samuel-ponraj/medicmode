@@ -14,6 +14,7 @@ import EditCourse from './editcourse/EditCourse'
 import Events from './events/Events';
 import ReviewEvent from './reviewevent/ReviewEvent';
 import EditEvent from './editevent/EditEvent';
+import AdminGallery from './gallery/AdminGallery';
 
 const Dashboard = ({userEmail , loading, setLoading}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -32,18 +33,22 @@ const Dashboard = ({userEmail , loading, setLoading}) => {
 					<li className='list-heading'>Blogs</li>
 						<ul>
 							<Link className='hover' to="create-post" onClick={() => setSidebarOpen(false)} ><li>New Blog</li></Link>
-							<Link className='hover' to="review-post" onClick={() => setSidebarOpen(false)} ><li>Review Blog</li></Link>	
+							<Link className='hover' to="review-post" onClick={() => setSidebarOpen(false)} ><li>Blog List</li></Link>	
 						</ul>
 					<li className='list-heading'>Courses</li>
 						<ul>
 							<Link className='hover' to="create-course" onClick={() => setSidebarOpen(false)} ><li>New Course</li></Link>
-							<Link className='hover' to="review-course" onClick={() => setSidebarOpen(false)} ><li>Review Course</li></Link>
+							<Link className='hover' to="review-course" onClick={() => setSidebarOpen(false)} ><li>Course List</li></Link>
 						</ul>
           <li className='list-heading'>Events</li>
             <ul>
 							<Link className='hover' to="events" onClick={() => setSidebarOpen(false)} ><li>New Event</li></Link>
-              <Link className='hover' to="review-event" onClick={() => setSidebarOpen(false)} ><li>Review Event</li></Link>
+              <Link className='hover' to="review-event" onClick={() => setSidebarOpen(false)} ><li>Event List</li></Link>
 						</ul>
+            <li className='list-heading'>Gallery</li>  
+            <ul>
+                <Link className='hover' to="admin-gallery" onClick={() => setSidebarOpen(false)} ><li>Gallery</li></Link>
+            </ul>
 				</ul>
           </div>
         </div>
@@ -59,19 +64,23 @@ const Dashboard = ({userEmail , loading, setLoading}) => {
 					<Link to="users" className='hover' style={{marginTop:'10px'}} onClick={() => setSidebarOpen(false)} ><li>User List</li></Link>
 					<li className='list-heading'>Blogs</li>
 						<ul>
-							<Link className='hover' to="create-post" onClick={() => setSidebarOpen(false)} ><li>Create Post</li></Link>
-							<Link className='hover' to="review-post" onClick={() => setSidebarOpen(false)} ><li>Review Post</li></Link>	
+							<Link className='hover' to="create-post" onClick={() => setSidebarOpen(false)} ><li>New Blog</li></Link>
+							<Link className='hover' to="review-post" onClick={() => setSidebarOpen(false)} ><li>Blog List</li></Link>	
 						</ul>
 					<li className='list-heading'>Courses</li>
 						<ul>
-							<Link className='hover' to="create-course" onClick={() => setSidebarOpen(false)} ><li>Create Course</li></Link>
-							<Link className='hover' to="review-course" onClick={() => setSidebarOpen(false)} ><li>Review Course</li></Link>
+							<Link className='hover' to="create-course" onClick={() => setSidebarOpen(false)} ><li>New Course</li></Link>
+							<Link className='hover' to="review-course" onClick={() => setSidebarOpen(false)} ><li>Course List</li></Link>
 						</ul>
           <li className='list-heading'>Events</li>
             <ul>
-							<Link className='hover' to="events" onClick={() => setSidebarOpen(false)} ><li>Create Event</li></Link>
+							<Link className='hover' to="events" onClick={() => setSidebarOpen(false)} ><li>New Event</li></Link>
               <Link className='hover' to="review-event" onClick={() => setSidebarOpen(false)} ><li>Review Event</li></Link>
 						</ul>
+          <li className='list-heading'>Gallery</li>  
+            <ul>
+                <Link className='hover' to="admin-gallery" onClick={() => setSidebarOpen(false)} ><li>Gallery</li></Link>
+            </ul>
 				</ul>
         </div>
         <div className="admin-main">
@@ -95,6 +104,7 @@ const Dashboard = ({userEmail , loading, setLoading}) => {
             <Route path="events" element={<Events loading={loading} setLoading={setLoading}/>} />
             <Route path="review-event" element={<ReviewEvent loading={loading} setLoading={setLoading}/>} />
             <Route path="review-event/edit-event" element={<EditEvent />} />
+            <Route path="admin-gallery" element={<AdminGallery />} />
           </Routes>
         </div>
       </div>

@@ -37,14 +37,14 @@
 }
 
 .list-heading{
-    padding: 15px 0 15px 30px;
+    padding: 10px 0 10px 30px;
     color: var(--orange);
     font-weight: 600;
 }
 
 .hover li {
     padding: 10px 0 10px 50px;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
     color: var(--light-green);
 }

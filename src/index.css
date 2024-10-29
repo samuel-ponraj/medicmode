@@ -19,3 +19,27 @@ body {
     overflow-x: hidden; 
     background-color: var(--background-color);
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px var(--dark-green); 
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--dark-green); 
+    border-radius: 10px;
+  }
+
+  html {
+    scroll-padding-top: 80px; 
+  }
+
+  @media (max-width: 768px) {
+    html {
+      scroll-padding-top: 50px; 
+    }
+  }
