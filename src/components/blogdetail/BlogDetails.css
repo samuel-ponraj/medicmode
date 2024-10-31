@@ -76,12 +76,11 @@
 
 
 
-
 .blog-detail-content img {
-  height: auto;
+  height: 500px;
+  width: auto;
   display: block;
   margin: 0 auto;
-  
 }
 
 

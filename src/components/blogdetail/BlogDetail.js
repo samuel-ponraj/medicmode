@@ -47,7 +47,7 @@ const BlogDetail = ({ userEmail, handleOpen, logged, loading, setLoading }) => {
         // eslint-disable-next-line
     }, [postId]);
 
-    // Fetch comments and user details
+    
     useEffect(() => {
         const fetchComments = () => {
             const commentsRef = collection(db, 'blogPosts', postId, 'comments');

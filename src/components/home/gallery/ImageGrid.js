@@ -18,7 +18,7 @@ const ImageGrid = () => {
           id: doc.id, // Use Firestore document ID as the key
           ...doc.data() // Spread the document data
         }));
-        setImages(imagesArray); // Set the images state with fetched data
+        setImages(imagesArray); // Set the images state with fetched dat
       } catch (error) {
         console.error("Error fetching images from Firestore: ", error);
       }

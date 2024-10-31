@@ -1,6 +1,5 @@
 .home-container {
     width: 100vw;
-   
   }
 
   .swiper{
@@ -26,19 +25,7 @@
     background: var(--dark-green) !important;
   }
 
-  .home {
-    width: 100%;
-    height: 600px; /* Height based on your requirement */
-    border: 1px solid black;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .left, .right {
-    border: 1px solid black;
-    flex: 1 1 50%; /* This makes each section 50% of the width */
-    height: 100%; /* Ensures both sections take full height of the parent */
-  }
+ 
 
   .intro-text{
     position: absolute;
@@ -194,6 +181,21 @@
   margin-bottom: 30px;
 }
 
+.testimony-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--dark-green);
+  padding: 40px 20px;
+}
+
+.slider{
+  max-width: 1200px;
+  width: 100%;
+}
+
+
 /* *********Gallery*********** */
 
 .gallery-container{
@@ -201,7 +203,7 @@
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 80px 20px;
+  padding: 40px 20px;
 }
 
 .gallery-container h1{
@@ -214,12 +216,12 @@
 @media (max-width: 768px) {
 
   .swiper-image{
-    height: calc(60vh - 80px);
+    height: calc(50vh - 80px);
   }
 
 
   .intro-text{
-    top: 40% !important;
+    top: 30% !important;
     right: 8% !important;
     font-size: 15px !important;
   }
@@ -245,7 +247,9 @@
       max-width: 100%;
     }
 
-    
+    .services-container{
+      padding-top: 50px;
+    }
 
     .services-container p{
       width: 100% !important;
@@ -271,6 +275,11 @@
 
     .services-col2 img{
       width: 100%;
+    }
+
+    .testimony-container h1{
+      text-align: center;
+      font-size: 24px;
     }
 }
 

@@ -210,17 +210,16 @@ const Blog = ({userEmail, logged , handleOpen}) => {
  
 
   return (
-
     <div className="blogs">
        <Toaster position="top-center" richColors /> 
       <div className="blog-header">
         <img className="blog-header-image" src={blogheader} alt="Blog Header" />
-        <div className="blog-heading">
-          <h1>
-            Our Latest <span style={{ color: 'var(--orange)' }}>Blogs</span> &{' '}
-            <span style={{ color: 'var(--orange)' }}>News</span>
-          </h1>
-        </div>
+          <div className="blog-heading">
+            <h1>
+              Our Latest <span style={{ color: 'var(--orange)' }}>Blogs</span> &{' '}
+              <span style={{ color: 'var(--orange)' }}>News</span>
+            </h1>
+          </div>
         
         <div className="blog-search-bar"  >
           <div onClick={showBlogOptions} style={{display: 'flex', alignItems: 'center'}}>

@@ -1,0 +1,32 @@
+
+.testimony .swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: transparent !important;
+  }
+  
+ .testimony .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 400px;
+    height: 250px;
+  }
+  
+ .testimony .swiper-slide img {
+    display: block;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .testimony .swiper-slide {
+        width: 70%; /* Set the slide width to 100% for small screens */
+        height: auto; /* Adjust the height automatically */
+    }
+    
+    .testimony .swiper {
+        padding-top: 40px; /* Reduce padding for small screens */
+        padding-bottom: 40px; /* Reduce padding for small screens */
+    }
+}
+  

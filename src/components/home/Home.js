@@ -13,7 +13,6 @@ import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import SchoolIcon from '@mui/icons-material/School';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import InsightsIcon from '@mui/icons-material/Insights';
-import placeholder from '../../assets/home/placeholder.jpg'
 import doctor from '../../assets/home/doctor.webp'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {
@@ -27,6 +26,12 @@ import { collection, getDocs } from 'firebase/firestore';
 import { HashLink } from 'react-router-hash-link';
 import ImageGrid from './gallery/ImageGrid';
 import Aos from 'aos';
+import skill from '../../assets/home/skill.png'
+import online from '../../assets/home/online.png'
+import workshop from '../../assets/home/workshop.png'
+import seminar from '../../assets/home/seminar.png'
+import 'swiper/css/effect-coverflow';
+import Testimony from './testimony/Testimony';
 
 
 const Home = () => {
@@ -107,6 +112,10 @@ const Home = () => {
         </HashLink>
       </div>
 
+
+{/* ***************** About Us *********************/}
+  
+
 {/* ***************** Services *********************/}
 
       <div className="services-container" id='services'>
@@ -116,7 +125,7 @@ const Home = () => {
         <div className="services services-col1" >
 			<div className="service" data-aos="fade-right">
 				<div>
-				<img src={placeholder} alt="" />
+				<img src={skill} alt="" />
 				</div>
 				<div>
 				<h3>Skill-Based Training</h3>
@@ -126,7 +135,7 @@ const Home = () => {
 			
 			<div className="service" data-aos="fade-right">
 				<div>
-				<img src={placeholder} alt="" /> {/* Add your placeholder image here */}
+				<img src={workshop} alt="" /> {/* Add your placeholder image here */}
 				</div>
 				<div>
 				<h3>Educational Workshops</h3>
@@ -136,7 +145,7 @@ const Home = () => {
 
 			<div className="service" data-aos="fade-right">
 				<div>
-				<img src={placeholder} alt="" /> {/* Add your placeholder image here */}
+				<img src={online} alt="" /> {/* Add your placeholder image here */}
 				</div>
 				<div>
 				<h3>Online Courses</h3>
@@ -146,7 +155,7 @@ const Home = () => {
 
 			<div className="service" data-aos="fade-right">
 				<div>
-				<img src={placeholder} alt="" /> {/* Add your placeholder image here */}
+				<img src={seminar} alt="" /> {/* Add your placeholder image here */}
 				</div>
 				<div>
 				<h3>Seminars</h3>
@@ -170,7 +179,7 @@ const Home = () => {
                 <div className="stat-item">
               <LocalLibraryIcon style={{fontSize:'40px', color:'var(--orange)'}}/>
                   <h2>
-                  <CountUp end={800} duration={3} enableScrollSpy scrollSpyOnce />+
+                  <CountUp end={1700} duration={3} enableScrollSpy scrollSpyOnce />+
                   </h2>
                   <p>Satisfied Learners</p>
                 </div>
@@ -224,6 +233,16 @@ const Home = () => {
           </div>
         )
       ))}
+
+{/* ***************** Testimony *********************/}
+
+	  <div className="testimony-container">
+		  <h1>What <span style={{ color: 'var(--orange)' }}>People Say</span> About Medicmode</h1>
+      <div className="slider">
+        <Testimony />
+      </div>
+	  </div>
+
 
 {/* ***************** Gallery *********************/}
 

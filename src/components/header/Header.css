@@ -116,7 +116,7 @@
       top: 70px; /* Start 70px from the top */
       right: 0; /* Align to the right side */
       width: 50%; /* Half the width of the screen */
-      height: calc(100vh - 70px); /* Full height minus the top offset */
+      height: calc(100vh - 70px) ; /* Full height minus the top offset */
       background-color: var(--dark-green);
       display: flex;
       flex-direction: column;
@@ -126,7 +126,7 @@
       transform: translateX(100%); /* Start completely off-screen to the right */
       transition: opacity 0.3s ease, transform 0.4s ease, visibility 0s 0.4s;
       visibility: hidden; /* Hide the menu initially */
-      
+    
   }
   
   .nav-list.active {
@@ -134,6 +134,7 @@
       transform: translateX(0); /* Slide in to its original position */
       visibility: visible; 
       transition: opacity 0.3s ease, transform 0.4s ease, visibility 0s;
+    
   }
   
 
