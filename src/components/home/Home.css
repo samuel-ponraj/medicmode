@@ -2,16 +2,18 @@
     width: 100vw;
   }
 
-  .swiper{
+  .swiper {
     background-color: rgba(0, 0, 0, 0.7);
-  }
+    overflow: hidden; /* Ensure nothing spills outside */
+}
 
-  .swiper-image {
+.swiper-image {
     width: 100%;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 80px); /* Ensure it fills the space */
     object-fit: cover;
     opacity: 0.4;
-  }
+    display: block; /* Prevents gaps in images */
+}
 
   .swiper-button-prev, .swiper-button-next{
     color: var(--dark-green) !important;  
@@ -67,6 +69,34 @@
     box-shadow: rgba(0, 0, 0, 0.25) 2px 2px 3px; /* Enhance shadow on hover */
 }
 
+
+.about-us{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  color: var(--dark-green);
+}
+
+.about-us h1{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 35px;
+}
+
+.about-us-content{
+  max-width: 1300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  line-height: 35px;
+  text-align: justify;
+  hyphens: auto;
+}
+
+
   /* *********Services*********** */
 
 .services-container {
@@ -75,9 +105,10 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 20px 50px 20px;
+  padding: 50px 20px 50px 20px;
   text-align: center;
   width: 100%;
+  color: var(--dark-green);
 }
 
 .services-container h1{
@@ -167,11 +198,11 @@
   white-space: nowrap;
 }
 
-/* *********Services*********** */
+/* *********Events*********** */
 
 .events-container{
  
-  padding: 50px 20px;
+  padding: 60px 20px;
   color: var(--dark-green);
 }
 
@@ -204,6 +235,7 @@
   flex-direction: column;
   text-align: center;
   padding: 40px 20px;
+  margin-bottom: 50px;
 }
 
 .gallery-container h1{
@@ -215,13 +247,14 @@
 
 @media (max-width: 768px) {
 
+
   .swiper-image{
-    height: calc(50vh - 80px);
+    height: calc(38vh - 80px);
   }
 
 
   .intro-text{
-    top: 30% !important;
+    top: 50% !important;
     right: 8% !important;
     font-size: 15px !important;
   }
@@ -230,10 +263,23 @@
     font-size: 13px ;
     margin-top: 5px !important;
   }
-  
+
+
+  .about-us h1{
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+  }
+
+  .about-us p{
+    font-size: 16px;
+    line-height: 25px;
+  }
+
     .statistics {
         flex-wrap: wrap;
-        margin:  30px;
+        margin:  0 30px;
         text-align: center;
     }
 

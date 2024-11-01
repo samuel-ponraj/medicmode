@@ -24,7 +24,7 @@ const Header = ({ handleOpen, logged, handleLogout, userEmail }) => {
               <a href="https://www.facebook.com/medicmodeofficial" target="_blank" rel="noreferrer"><FacebookIcon className='social-icon'/></a>
               <a href="https://www.instagram.com/medicmode/" target="_blank" rel="noreferrer"><InstagramIcon className='social-icon'/></a>
               <a href="https://www.linkedin.com/company/medicmode-llp/" target="_blank" rel="noreferrer"><LinkedInIcon className='social-icon'/></a>
-              <a href="https://www.youtube.com/@medicmode623/" target="_blank" rel="noreferrer"><YouTubeIcon className='social-icon' style={{fontSize: '30px'}}/></a>
+              <a href="https://www.youtube.com/@medicmode623/" target="_blank" rel="noreferrer"><YouTubeIcon className='social-icon utube-icon' style={{fontSize: '30px'}}/></a>
           </div>
           <div className="nav-links">
             <div className={`nav-list ${isMenuOpen ? 'active' : ''}`}>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import aboutheader from '../../assets/about/header-image.png'
 import './About.css'
 import logo from '../../assets/logos/medicmode-logo-slogan.png'
@@ -8,21 +8,20 @@ import book from '../../assets/about/open-book.png'
 import teaching from '../../assets/about/teaching.png'
 import mentorship from '../../assets/about/mentorship.png'
 import research from '../../assets/about/research-and-development.png'
-import jabez from '../../assets/about/Jabez.jpg'
+import jabez from '../../assets/faculties/Jabez.png'
 import praisy from '../../assets/home/praisy.jpg'
 import sivanesh from '../../assets/home/sivanesh.jpg'
-import AOS from 'aos';
+import Aos from 'aos';
 import 'aos/dist/aos.css';
 
 
 
 const About = () => {
 
-	
-AOS.init({
-    duration: 1200, // Animation duration
-    // Whether animation should happen only once - while scrolling down
-});
+	useEffect(() => {
+		Aos.init({ duration: 1200 });
+	  }, []);
+
 
 
   return (
@@ -141,19 +140,17 @@ AOS.init({
 					<img src={jabez} alt="" />
 					<div className="leader-content"  data-aos="zoom-in">
 						<h1>Jabez - Founder & CEO</h1>
-						<p>Medicmode was founded in 2018 by Jabez during the first year of his undergraduate studies, marking the beginning of an enduring commitment to advancing paramedic education and professional standards in India. Mr. Jabez is currently a lecturer, course coordinator, and paramedic at AJ Institute of Medical Sciences in Mangalore, holding an M.Sc. in Trauma Care Management from Sriher and a B.Sc. in Accident and Emergency Care Technology from Sundaram Medical Foundation. This blend of rigorous academic training and practical expertise in emergency care underpins his role.</p>
-						<p>Throughout his career, numerous awards have recognized his contributions to the field. These include the Best Poster Award at EMCON 2018, Runner-Up at SEPICON 2018, SAPCON 2018, FORUM 2020, and the Resuscitation Summit 2023, as well as the Winner award for Poster Presentation at EMCON 2022. These distinctions underscore a dedication to advancing EMS practices and sharing knowledge within the medical community.</p>
-						<p>In his role as Founder and CEO of Medicmode, Jabez remains devoted to elevating EMS education and fostering the professional development of paramedics in India. Innovative projects have been led under his guidance, including a prehospital care reporting (PCR) app prototype and the development of a prone-position CPR mannequin, both contributing to enhanced EMS practices. His extensive experience organizing paramedic conferences has reinforced a commitment to strengthening the EMS community through collaboration and shared expertise.</p>
-						<p>Experience has also been gained across a range of disciplines, including simulation-based training, prehospital care workshops, and the training of numerous laypersons in CPR and first aid. This background, along with substantial involvement in media and research, aligns with Medicmode’s mission to transform the future of EMS in India through quality training, research, and strong professional support.</p>
+						<p>Medicmode was founded in 2018 by Jabez during the first year of his undergraduate studies, marking the start of his commitment to advancing paramedic education and professional standards in India. Currently a lecturer, course coordinator, and paramedic at AJ Institute of Medical Sciences in Mangalore, Jabez holds an M.Sc. in Trauma Care Management from Sriher and a B.Sc. in Accident and Emergency Care Technology from Sundaram Medical Foundation, blending strong academic and hands-on expertise. His contributions have been recognized through numerous awards, including Best Poster at EMCON 2018, Winner for Poster Presentation at EMCON 2022, and Runner-Up awards at SEPICON 2018, SAPCON 2018, FORUM 2020, and the Resuscitation Summit 2023.
+						</p>
+						<p>As Medicmode’s Founder and CEO, Jabez has led innovative projects, including a prehospital care reporting (PCR) app prototype and a prone-position CPR mannequin. He is also known for his dedication to simulation-based training, prehospital care workshops, and layperson CPR and first aid training. His extensive experience organizing paramedic conferences, coupled with substantial involvement in media and research, aligns with Medicmode’s mission to advance EMS in India through quality training, research, and professional support.</p>
 					</div>
 				</div>
 				<div className='leader'>
 					<img src={praisy} alt="" />
 					<div className="leader-content" data-aos="zoom-in">
 						<h1>Praisy Abigail - COO</h1>
-						<p>Ms. Praisy Abigail, COO of Medicmode, is a highly skilled and dedicated professional with a strong background in trauma and disaster management. She completed both her undergraduate and postgraduate degrees in Trauma Care Management at Sri Ramachandra Institute of Higher Education and Research, where she was awarded the prestigious Shri Arjun Singh Gold Medal for outstanding academic performance. She further specialized in Disaster Management with a postgraduate diploma from Indira Gandhi Open University and is currently pursuing an MBA in Hospital Management.</p>
-						<p>Presently serving as an Assistant Professor at Malla Reddy University in Hyderabad, Ms. Praisy previously held a lecturer position at Panimalar Medical College and Hospital, where she also contributed as a paramedic. Her achievements include winning first prize in the Bright Young Speaker competition at SAPCON 2019, as well as presenting papers and posters at numerous conferences. She has participated as faculty in a wide range of workshops and has been instrumental in organizing paramedic conferences.</p>
-						<p>With a keen interest in disaster management and extensive experience in training laypersons in CPR and first aid, Ms. Praisy brings both expertise and a commitment to excellence to her role at Medicmode. Her contributions play a crucial role in driving Medicmode’s mission to elevate EMS education and practice in India.</p>
+						<p>Ms. Praisy Abigail, COO of Medicmode, is a skilled professional in trauma and disaster management. She completed her undergraduate and postgraduate degrees in Trauma Care Management at Sri Ramachandra Institute of Higher Education and Research, where she received the prestigious Shri Arjun Singh Gold Medal for outstanding academic performance. Additionally, she holds a postgraduate diploma in Disaster Management from Indira Gandhi Open University and is currently pursuing an MBA in Hospital Management. She serves as an Assistant Professor at Malla Reddy University in Hyderabad and previously worked as a lecturer and paramedic at Panimalar Medical College and Hospital.</p>
+						<p>Ms. Praisy’s accomplishments include winning first prize in the Bright Young Speaker competition at SAPCON 2019, presenting at various conferences, and participating as faculty in numerous workshops. Her extensive experience training laypersons in CPR and first aid, coupled with her involvement in organizing paramedic conferences, supports Medicmode’s mission to advance EMS education and practice in India. Her expertise and dedication are instrumental in driving the organization’s goals.</p>
 					</div>
 				</div>
 				<div className='leader'>

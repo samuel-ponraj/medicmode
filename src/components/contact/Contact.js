@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import './Contact.css'
 import bgImage from '../../assets/contact/header.jpg'
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import PhoneIcon from '@mui/icons-material/Phone';
 import serviceIcon from '../../assets/contact/serviceIcon.png'
 import { toast, Toaster } from 'sonner';
 import emailjs from 'emailjs-com';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 const Contact = () => {
   const [fullName, setFullName] = useState('');
@@ -45,6 +45,24 @@ const Contact = () => {
       });
   };
 
+  const contacts = [
+    {
+    name: 'Jabez - Founder & CEO',
+    phone: '+91 95519 43040',
+    email: 'jabez@medicmode.com'
+    },
+    {
+      name: 'Praisy Abigail - COO',
+      phone: '+91 73584 56059',
+      email: 'praisyabigail@medicmode.com'
+    },
+    {
+      name: 'Sivanesh - CFO',
+      phone: '+91 82206 86855',
+      email: 'sivanesh@medicmode.com'
+    }
+  ]
+
   return (
     <div className="contact-container">
        <Toaster position="top-center" richColors /> 
@@ -57,22 +75,27 @@ const Contact = () => {
         </div>
         <div className="contact-info">
           <div className="contact-address">
-            <div className="addr">
-              <MailOutlineIcon className='addr-icon' style={{color:'var(--orange)'}}/>
-              <p>contact@medicmode.com</p>
-              <p>hr@medicmode.com</p>
-            </div>
-            <div className="addr">
-              <PhoneIcon className='addr-icon' style={{color:'var(--orange)'}}/>
-              <div style={{display:'flex', alignItems:'center'}}><p style={{marginRight:'8px'}}>Founder & CEO:</p><p>+91 95519 43040</p></div>
-              <div style={{display:'flex', alignItems:'center'}}><p style={{marginRight:'8px'}}>CFO:</p><p>+91 73584 56059</p></div>
-              <div style={{display:'flex', alignItems:'center'}}><p style={{marginRight:'8px'}}>COO:</p><p>+91 82206 86855</p></div>
-            </div>
-            <div className="addr">
+          <div className="addr">
               <img src={serviceIcon} alt="" className='addr-image'/>
               <p>Services available in <br />Chennai, Bangalore, Hyderabad, Mangalore, Coimbatore & Trichy</p>
-              
+              <div className='contact-icon' style={{marginTop:'8px'}}>
+                  <PhoneIcon />
+                  <p>For Support and Enquiry: <a href="mailto:contact@medicmode.com">contact@medicmode.com</a></p>
+              </div>
             </div>
+            {contacts.map((contact) => (
+              <div className="addr">
+              <h3 style={{color:'var(--orange)', marginBottom:'15px'}}>{contact.name}</h3>
+                <div className='contact-icon'>
+                  <PhoneIcon />
+                  <p>{contact.phone}</p>
+                </div>
+                <div className='contact-icon'>
+                  <MailOutlineIcon />
+                  <p><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+                </div>
+            </div>
+            ))}
         </div>
         <div className="contact-form">
             <h1>Connect with Us</h1>

@@ -2,32 +2,40 @@
     min-width: 100vw;
     width: 100%;
     overflow-x: hidden;
+    position: relative;
 }
 
-.about-header img{
-    width: 100%;
-    opacity: 0.3;
-}
-
-.about-header{
+.about-header {
     position: relative;
     background-color: black;
+    overflow: hidden; /* Prevent any overflow */
+    height: 400px;
 }
 
-.about-header-title{
+.about-header img {
+    width: 100%;
+    height: 100%; /* Ensure it fills the container */
+    object-fit: cover; /* Makes sure the image fills without distortion */
+    opacity: 0.3;
+    position: absolute; /* Position the image to fill the parent */
+    top: 0;
+    left: 0;
+}
+
+.about-header-title {
     position: absolute;
-    top: 30%;
+    top: 30%; /* Adjust to fit your design */
     left: 20%;
     color: var(--light-green);
 }
 
-.about-header-title h1{
+.about-header-title h1 {
     font-size: 50px;
     margin-bottom: 20px;
     color: var(--light-green);
 }
 
-.about-header-title p{
+.about-header-title p {
     width: 55%;
     line-height: 28px;
 }
@@ -126,7 +134,7 @@
 }
 
 .whatwedo-content{
-    padding: 30px 20px;
+    padding: 30px 20px 0 20px;
 }
 
 .whatwedo-item{
@@ -194,6 +202,10 @@
 
 
 @media (max-width: 768px) {
+
+    .about-header{
+        height: 300px;
+    }
 
     .about-header img{
         height: 300px;

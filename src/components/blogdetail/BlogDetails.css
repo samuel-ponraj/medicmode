@@ -222,6 +222,10 @@
       padding-bottom: calc(90% * 9 / 16); 
     }
 
+    .scroll-progress-bar{
+      top: 70px !important;
+    }
+
    
     
 }

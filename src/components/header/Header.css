@@ -181,7 +181,15 @@
     .menu-icon {
       display: block;  
     }
-  
-    
+  }
+
+  @media (max-width: 768px){
+    .social-icon{
+      font-size: 21px !important;
+    }
+
+    .utube-icon{
+      font-size: 27px !important;
+    }
   }
   

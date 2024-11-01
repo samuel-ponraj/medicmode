@@ -24,6 +24,21 @@ const BlogDetail = ({ userEmail, handleOpen, logged, loading, setLoading }) => {
     const commentSectionRef = useRef(null);
 
 
+    const [scrollProgress, setScrollProgress] = useState(0);
+
+      const updateScrollProgress = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        setScrollProgress(scrollPercent);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', updateScrollProgress);
+        return () => window.removeEventListener('scroll', updateScrollProgress);
+    }, []);
+
+
     // Fetch the blog post details
     useEffect(() => {
         const fetchPost = async () => {
@@ -159,8 +174,6 @@ const BlogDetail = ({ userEmail, handleOpen, logged, loading, setLoading }) => {
         );
       }
    
-
-   
       
     const opts = {
         playerVars: {
@@ -175,8 +188,15 @@ const BlogDetail = ({ userEmail, handleOpen, logged, loading, setLoading }) => {
           .join(" ");
       }
 
+
+      
+
     return (
         <div className='blog-detail-container'>
+             <div
+                className="scroll-progress-bar"
+                style={{ width: `${scrollProgress}%`, height: '7px', backgroundColor: 'var(--orange)', position: 'fixed', top: 83, left: 0, zIndex: 100 }}
+            ></div>
             <Toaster position="top-center" richColors /> 
             <div className="blog-details">
                 <div className="blog-detail-title">

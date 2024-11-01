@@ -7,7 +7,7 @@ import 'swiper/css';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import header1 from '../../assets/course/header1.jpg';
+import header1 from '../../assets/course/header1.png';
 import header2 from '../../assets/course/header2.jpg';
 import header3 from '../../assets/course/header3.jpg';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';

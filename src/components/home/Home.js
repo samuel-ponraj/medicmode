@@ -31,7 +31,8 @@ import online from '../../assets/home/online.png'
 import workshop from '../../assets/home/workshop.png'
 import seminar from '../../assets/home/seminar.png'
 import 'swiper/css/effect-coverflow';
-import Testimony from './testimony/Testimony';
+import CoverFlow from './testimony/CoverFlow';
+import Button from '../button/Button'
 
 
 const Home = () => {
@@ -104,22 +105,32 @@ const Home = () => {
           <SwiperSlide><img src={bg2} alt="Background 2" className="swiper-image" /></SwiperSlide>
           <SwiperSlide><img src={bg3} alt="Background 3" className="swiper-image" /></SwiperSlide>
         </Swiper>
-      </div>
-      <div className="intro-text">
+        <div className="intro-text">
         <h1>Welcome to Medic <span style={{color: 'var(--orange)'}}>Mode</span></h1>
-        <HashLink smooth to="#services">
+        <HashLink smooth to="#about">
           <button className="explore-btn">Explore more</button>
         </HashLink>
       </div>
+      </div>
+      
 
 
 {/* ***************** About Us *********************/}
-  
+          
+        <div className="about-us-container" id='about' data-aos="zoom-in">
+          <div className="about-us">
+            <h1>About <span style={{color:'var(--orange)'}}>Medicmode</span></h1>
+              <div className="about-us-content">
+                <p>Medicmode LLP is a pioneering paramedic-led organisation dedicated to the welfare, development, and ongoing education of paramedics and healthcare professionals across India. With a focus on accessible, high-quality training, we believe that learning does not end with formal education. Instead, we view continuing education as essential for equipping paramedics with the knowledge and skills necessary to provide exemplary care in an ever-evolving field.</p>
+              </div>
+              <a href='/about' style={{textDecoration:'none'}}><Button /></a>
+          </div>
+        </div>
 
 {/* ***************** Services *********************/}
 
-      <div className="services-container" id='services'>
-		    <h1 >Why Choose <span style={{color:'var(--orange)'}}>M</span>edic<span style={{color:'var(--orange)'}}>M</span>ode?</h1>
+      <div className="services-container" >
+		    <h1 >Why Choose <span style={{color:'var(--orange)'}}>Medicmode</span></h1>
 			<p style={{width:'60%'}}>We provide expert paramedic services, led by certified professionals with a proven record in clinical governance, ensuring adherence to international standards.</p>
 			<div style={{display:'flex', alignItems:'center'}} className='services-content'>
         <div className="services services-col1" >
@@ -239,7 +250,7 @@ const Home = () => {
 	  <div className="testimony-container">
 		  <h1>What <span style={{ color: 'var(--orange)' }}>People Say</span> About Medicmode</h1>
       <div className="slider">
-        <Testimony />
+        <CoverFlow />
       </div>
 	  </div>
 

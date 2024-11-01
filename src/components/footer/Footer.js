@@ -31,7 +31,7 @@ const Footer = () => {
             <div className="address">
                 <h3>GET IN TOUCH</h3>
                 <div className="footer-address">
-                    <p><span style={{marginRight: '8px'}}><MailOutlineIcon /></span>contact@medicmode.com</p>
+                    <p><span style={{marginRight: '8px'}}><MailOutlineIcon /></span><a href="mailto:contact@medicmode.com">contact@medicmode.com</a></p>
                     <p><span style={{marginRight: '8px'}}><PhoneIcon/></span>+91 95519 43040</p>
                 </div>
             </div>
