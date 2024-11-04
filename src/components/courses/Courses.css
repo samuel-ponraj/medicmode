@@ -27,6 +27,7 @@
 .course-heading h1{
     color: var(--dark-green);
     margin: 20px 0;
+    font-size: 35px;
 }
 
 .course-search{

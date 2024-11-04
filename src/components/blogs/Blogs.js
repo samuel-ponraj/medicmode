@@ -18,6 +18,8 @@ import { toast, Toaster } from 'sonner';
 import { RWebShare } from "react-web-share";
 import { Button } from '@mui/material';
 import { GridLoader } from 'react-spinners';
+import { Helmet } from 'react-helmet';
+
 
 const Blog = ({userEmail, logged , handleOpen}) => {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -208,9 +210,19 @@ const Blog = ({userEmail, logged , handleOpen}) => {
     );
   }
  
-
   return (
     <div className="blogs">
+      <Helmet>
+      <title>Medic Mode - Blogs</title>
+      <meta name="description" content="Discover insightful articles and the latest news on emergency medical services and paramedic training at Medicmode LLP. Stay informed and expand your knowledge." />
+      <meta name="keywords" content="Medicmode LLP, blogs, news, EMS training, paramedic education, healthcare articles, emergency medical services, healthcare training" />
+      <meta name="robots" content="index, follow" />
+      <meta property="og:title" content="Medic Mode - Blogs" />
+      <meta property="og:description" content="Discover insightful articles and the latest news on emergency medical services and paramedic training at Medicmode LLP. Stay informed and expand your knowledge." />
+      {/* <meta property="og:image" content="URL_to_image/blog-header-image.jpg" /> */}
+      <meta property="og:url" content="https://medicmode.com/blog" />
+      <meta property="og:type" content="website" />
+      </Helmet>
        <Toaster position="top-center" richColors /> 
       <div className="blog-header">
         <img className="blog-header-image" src={blogheader} alt="Blog Header" />
@@ -300,7 +312,7 @@ const Blog = ({userEmail, logged , handleOpen}) => {
               <RWebShare
                   data={{
                     text: "Medic Modec - A Gazette for Emergency Medical Professionals",
-                    url: `https://medicmode.vercel.app/blog/${recentBlog.id}`,
+                    url: `https://medicmode.com/blog/${recentBlog.id}`,
                     title: "Medic Mode",
 
                   }}
@@ -324,9 +336,9 @@ const Blog = ({userEmail, logged , handleOpen}) => {
             <CloseIcon onClick={closeBlogOptions} style={{ cursor: 'pointer', position: 'absolute', right: '20px', color: 'var(--dark-green)' }} />
           </div>
           <div className="categories">
-            <h1>
+            <h2>
               <CategoryIcon style={{ fontSize: '20px', marginRight: '8px' }} /> Categories
-            </h1>
+            </h2>
             <div className="options">
               <select value={selectedCategory} onChange={(e) => {
                 setSelectedCategory(e.target.value);
@@ -343,9 +355,9 @@ const Blog = ({userEmail, logged , handleOpen}) => {
           </div>
 
           <div className="archives">
-            <h1>
+            <h2>
               <ArchiveIcon style={{ fontSize: '20px', marginRight: '8px' }} /> Archives
-            </h1>
+            </h2>
             <div className="options">
               <select value={selectedMonth} onChange={(e) => { setSelectedMonth(e.target.value); setIsDrawerOpen(false) }}>
                 <option value="">Select Month</option>
@@ -363,8 +375,8 @@ const Blog = ({userEmail, logged , handleOpen}) => {
             </div>
           </div>
           <div className="user-create-blog">
-              <h1>Thinking about blogging?</h1>
-              <h1>Click to get started!</h1>
+              <h3>Thinking about blogging?</h3>
+              <h3>Click to get started!</h3>
               {userEmail ===  'admin@medicmode.com' ? (
                 <Button className='create-user-blog-btn' onClick={(e) => handlePost('/dashboard/create-post', e)}>Create Blog</Button>
               )
@@ -437,7 +449,7 @@ const Blog = ({userEmail, logged , handleOpen}) => {
                 <RWebShare
                   data={{
                     text: "Medic Modec - A Gazette for Emergency Medical Professionals",
-                    url: `https://medicmode.vercel.app/blog/${blog.id}`,
+                    url: `https://medicmode.com/blog/${blog.id}`,
                     title: "Medic Mode",
                   }}
                   onClick={() => toast.success('Shared successfully!', {

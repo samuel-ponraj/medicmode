@@ -55,8 +55,15 @@ input:focus{
     color: var(--light-green);
     border-radius: 20px;
     border: none;
-    cursor: pointer;
+    cursor: pointer; 
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
 }
+
+.signup-btn:hover {
+    background-color: var(--orange) !important; 
+    box-shadow: rgba(0, 0, 0, 0.25) 2px 2px 3px; /* Enhance shadow on hover */
+}
+
 
 .personal-info, .profession, .contact-details, .referral{
     display: flex;

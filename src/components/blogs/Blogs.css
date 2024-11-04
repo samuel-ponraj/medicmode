@@ -92,6 +92,8 @@
     margin: 20px 0;
 }
 
+
+
 .primary-blog {
     display: flex;
     flex-direction: column;
@@ -136,7 +138,7 @@
    
 }
 
-.blog-options h1 {
+.blog-options h2 {
     font-size: 18px;
     color: var(--dark-green);
     margin-bottom: 10px;
@@ -169,7 +171,7 @@
     margin-top: 50px;
 }
 
-.user-create-blog h1{
+.user-create-blog h3{
     color: var(--dark-green);
     text-transform: none;
     letter-spacing: normal;

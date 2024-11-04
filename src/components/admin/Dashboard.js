@@ -15,6 +15,7 @@ import Events from './events/Events';
 import ReviewEvent from './reviewevent/ReviewEvent';
 import EditEvent from './editevent/EditEvent';
 import AdminGallery from './gallery/AdminGallery';
+import Faculties from './faculties/Faculties';
 
 const Dashboard = ({userEmail , loading, setLoading}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -49,6 +50,10 @@ const Dashboard = ({userEmail , loading, setLoading}) => {
             <ul>
                 <Link className='hover' to="admin-gallery" onClick={() => setSidebarOpen(false)} ><li>Gallery</li></Link>
             </ul>
+            <li className='list-heading'>Faculties</li>  
+            <ul>
+                <Link className='hover' to="faculties" onClick={() => setSidebarOpen(false)} ><li>Faculty</li></Link>
+            </ul>
 				</ul>
           </div>
         </div>
@@ -81,6 +86,10 @@ const Dashboard = ({userEmail , loading, setLoading}) => {
             <ul>
                 <Link className='hover' to="admin-gallery" onClick={() => setSidebarOpen(false)} ><li>Gallery</li></Link>
             </ul>
+            <li className='list-heading'>Faculties</li>  
+            <ul>
+                <Link className='hover' to="faculties" onClick={() => setSidebarOpen(false)} ><li>Faculty</li></Link>
+            </ul> 
 				</ul>
         </div>
         <div className="admin-main">
@@ -105,6 +114,7 @@ const Dashboard = ({userEmail , loading, setLoading}) => {
             <Route path="review-event" element={<ReviewEvent loading={loading} setLoading={setLoading}/>} />
             <Route path="review-event/edit-event" element={<EditEvent />} />
             <Route path="admin-gallery" element={<AdminGallery />} />
+            <Route path="faculties" element={<Faculties />} />
           </Routes>
         </div>
       </div>

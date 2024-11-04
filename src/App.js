@@ -17,7 +17,6 @@ import Dashboard from './components/admin/Dashboard';
 import BlogDetail from './components/blogdetail/BlogDetail';
 import CreatePost from './components/admin/createpost/CreatePost';
 import { toast, Toaster } from 'sonner';
-import { HelmetProvider } from 'react-helmet-async';
 import CourseDetail from './components/coursedetail/CourseDetail';
 
 
@@ -94,19 +93,19 @@ function App() {
         });
     };
 
- 
+
 
     return (
         <Router>
             <div className="App">
-            <HelmetProvider>
             <Toaster position="top-center" richColors/>
                 <ScrollToTop />
+               
                 <header>
                     <Header handleOpen={handleOpen} logged={logged} handleLogout={handleLogout} userEmail={userEmail} />
+                    
                 </header>
                 <main className="main-content">
-                    
                 <Routes> 
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
@@ -166,7 +165,6 @@ function App() {
                         )}
                     </Box>
                 </Modal>
-                </HelmetProvider>
             </div>
         </Router> 
     );

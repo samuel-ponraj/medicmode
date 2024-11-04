@@ -33,6 +33,8 @@ import seminar from '../../assets/home/seminar.png'
 import 'swiper/css/effect-coverflow';
 import CoverFlow from './testimony/CoverFlow';
 import Button from '../button/Button'
+import Team from '../about/team/Team';
+import { Helmet } from 'react-helmet';
 
 
 const Home = () => {
@@ -44,7 +46,7 @@ const Home = () => {
   const [events, setEvents] = useState([]);
   
 
-  // Fetch events from Firestore
+  
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -86,8 +88,22 @@ const Home = () => {
     fetchEvents();
   }, []);
 
+
   return (
     <div className="home-container">
+      <Helmet>
+      <title>Medic Mode</title>
+      <meta name="description" content="Empowering paramedics and first responders with innovative training, research, and community-focused initiatives to create a safer, more prepared India." />
+      <meta name="keywords" content="Medicmode LLP, EMS training, paramedic institute, healthcare education, CPR certification, trauma care courses, first responder training, emergency medical services, India" />
+    
+      <meta property="og:title" content="Medic Mode" />
+      <meta property="og:description" content="Empowering paramedics and first responders with innovative training, research, and community-focused initiatives to create a safer, more prepared India." />
+      <meta name="keywords" content="Medicmode LLP, EMS training, paramedic institute, healthcare education, CPR certification, trauma care courses, first responder training, emergency medical services, India" />
+      <meta name="robots" content="index, follow" />  
+      <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/medic-mode.appspot.com/o/thumbnails%2FUntitled-Project-1024x615.jpg?alt=media&token=3def00e0-ac40-4eb0-ba04-d1282ba9f5df" />
+      <meta property="og:url" content="https://medicmode.com" />
+      <meta property="og:type" content="website" />
+      </Helmet>
       <div className='swiper'>
         <Swiper
           spaceBetween={0}
@@ -115,11 +131,11 @@ const Home = () => {
       
 
 
-{/* ***************** About Us *********************/}
+{/* ***************** About Us ********************/}
           
         <div className="about-us-container" id='about' data-aos="zoom-in">
           <div className="about-us">
-            <h1>About <span style={{color:'var(--orange)'}}>Medicmode</span></h1>
+            <h2>About <span style={{color:'var(--orange)'}}>Medicmode</span></h2>
               <div className="about-us-content">
                 <p>Medicmode LLP is a pioneering paramedic-led organisation dedicated to the welfare, development, and ongoing education of paramedics and healthcare professionals across India. With a focus on accessible, high-quality training, we believe that learning does not end with formal education. Instead, we view continuing education as essential for equipping paramedics with the knowledge and skills necessary to provide exemplary care in an ever-evolving field.</p>
               </div>
@@ -130,7 +146,7 @@ const Home = () => {
 {/* ***************** Services *********************/}
 
       <div className="services-container" >
-		    <h1 >Why Choose <span style={{color:'var(--orange)'}}>Medicmode</span></h1>
+		    <h2 >Why Choose <span style={{color:'var(--orange)'}}>Medicmode</span></h2>
 			<p style={{width:'60%'}}>We provide expert paramedic services, led by certified professionals with a proven record in clinical governance, ensuring adherence to international standards.</p>
 			<div style={{display:'flex', alignItems:'center'}} className='services-content'>
         <div className="services services-col1" >
@@ -185,34 +201,34 @@ const Home = () => {
 {/* ***************** statistics *********************/}
 
       <div className="statistics">
-        <h1>Knowledge Shared by Our <span style={{ color: 'var(--orange)' }}>Expert Faculties</span></h1>
+        <h2>Knowledge Shared by Our <span style={{ color: 'var(--orange)' }}>Expert Faculties</span></h2>
             <div className="stat-items">
                 <div className="stat-item">
               <LocalLibraryIcon style={{fontSize:'40px', color:'var(--orange)'}}/>
-                  <h2>
+                  <h3>
                   <CountUp end={1700} duration={3} enableScrollSpy scrollSpyOnce />+
-                  </h2>
+                  </h3>
                   <p>Satisfied Learners</p>
                 </div>
                 <div className="stat-item">
               <SchoolIcon style={{fontSize:'40px', color:'var(--orange)'}}/>
-                  <h2>
+                  <h3>
                   <CountUp end={10} duration={3} enableScrollSpy scrollSpyOnce />+
-                  </h2>
+                  </h3>
                   <p>Courses Offered</p>
                 </div>
                 <div className="stat-item">
               <WatchLaterIcon style={{fontSize:'40px', color:'var(--orange)'}}/>
-                  <h2>
+                  <h3>
                   <CountUp end={100} duration={3} enableScrollSpy scrollSpyOnce />+
-                  </h2>
+                  </h3>
                   <p>Hours of Content</p>
                 </div>
                 <div className="stat-item">
               <InsightsIcon style={{fontSize:'40px', color:'var(--orange)'}}/>
-                  <h2>
+                  <h3>
                   <CountUp end={5} duration={3} enableScrollSpy scrollSpyOnce />+
-                  </h2>
+                  </h3>
                   <p>Years of Excellence</p>
                 </div>
             </div>
@@ -223,13 +239,13 @@ const Home = () => {
       {events.map((event) => (
         event.approved && ( // Only render if the event is approved
           <div className="events-container" key={event.id}> {/* Ensure each container has a unique key */}
-            <h1>Upcoming <span style={{ color: 'var(--orange)' }}>Events</span></h1>
+            <h2>Upcoming <span style={{ color: 'var(--orange)' }}>Events</span></h2>
             <VerticalTimeline>
               <VerticalTimelineElement
-                key={event.id} // Use event.id for the key
+                key={event.id} // Use event.id for the keybox-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
                 date={event.date}
                 iconStyle={{ background: "#0A4044", color: "#fff" }}
-                contentStyle={{ background: "var(--light-green)" }}
+                contentStyle={{ background: "var(--light-green)", borderRadius:'20px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'}}
                 icon={<FaCalendarAlt />}
               >
                 <h3 className="vertical-timeline-element-title" style={{ fontSize: '23px', marginBottom: '8px' }}>
@@ -240,7 +256,7 @@ const Home = () => {
                 </h4>
                 <p>{event.description}</p>
               </VerticalTimelineElement>
-            </VerticalTimeline>
+              </VerticalTimeline>
           </div>
         )
       ))}
@@ -248,7 +264,7 @@ const Home = () => {
 {/* ***************** Testimony *********************/}
 
 	  <div className="testimony-container">
-		  <h1>What <span style={{ color: 'var(--orange)' }}>People Say</span> About Medicmode</h1>
+		  <h2>What <span style={{ color: 'var(--orange)' }}>People Say</span> About Medicmode</h2>
       <div className="slider">
         <CoverFlow />
       </div>
@@ -258,10 +274,16 @@ const Home = () => {
 {/* ***************** Gallery *********************/}
 
       <div className="gallery-container">
-        <h1>Gallery</h1>
+        <h2>Gallery</h2>
           <ImageGrid />
       </div>
 
+{/* ***************** Team *********************/}
+
+      <div className="team-container">
+        <h2>Our <span style={{ color: 'var(--orange)' }}>Team</span></h2>
+        <Team />
+      </div>
 
     </div>
   );

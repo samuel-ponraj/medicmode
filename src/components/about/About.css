@@ -49,7 +49,7 @@
     color: var(--dark-green);
 }
 
-.journey h1{
+.journey h2{
     margin-top: 30px;
     margin-bottom: 30px;
     font-size: 35px;
@@ -114,7 +114,7 @@
     flex-direction: column;
 }
 
-.vision-content h1, .mission-content h1, .whatwedo-header h1, .commitment h1, .community h1, .leadership h1{
+.vision-content h2, .mission-content h2, .whatwedo-header h2, .commitment h2, .community h2, .leadership h2{
     text-align: left;
     margin-bottom: 30px;
     font-size: 38px;
@@ -148,9 +148,10 @@
     border-radius: 8px;
 }
 
-.whatwedo-item h2{
+.whatwedo-item h3{
     color: var(--orange);
     margin-bottom: 20px;
+    font-size: 22px;
 }
 
 .whatwedo-item p{
@@ -186,7 +187,7 @@
     border-radius: inherit;
 }
 
-.leader-content h1{
+.leader-content h3{
     color: var(--orange);
     font-size: 30px;
     margin-bottom: 20px;

@@ -34,6 +34,16 @@
     line-height: 35px;
 }
 
+.careers h1{
+    font-size: 30px;
+    color: var(--dark-green);
+    margin-bottom: 20px;
+}
+
+.careers h2{
+    font-size: 18px;
+}
+
 
 .careers button {
     background-color: var(--dark-green);

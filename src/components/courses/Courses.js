@@ -32,6 +32,7 @@ import RoginiPriya from '../../assets/faculties/Roginippriya.jpg';
 import Thamaraiselvam from '../../assets/faculties/Thamaraiselvam.jpg'
 import Ishan from '../../assets/faculties/Ishan.jpg'
 import Manoj from '../../assets/faculties/Manoj.jpg'
+import { Helmet } from 'react-helmet';
 
 const Courses = ({ logged }) => {
 
@@ -150,6 +151,17 @@ const Courses = ({ logged }) => {
 
   return (
     <div className='course-container'>
+      <Helmet>
+				<title>Medic Mode - Courses</title>
+				<meta name="description" content="Explore Medicmode LLP's extensive courses in paramedic training, EMS, and healthcare education. From CPR certification to advanced trauma care, equip yourself with essential skills for a career in emergency services." />
+				<meta name="keywords" content="Medicmode LLP, paramedic education, EMS training, first responder training, CPR training, healthcare education, emergency medical services, India, community training, paramedic mentorship, research and development" />
+				<meta name="robots" content="index, follow" />
+				<meta property="og:title" content="Medic Mode - Courses" />
+				<meta property="og:description" content="Explore Medicmode LLP's extensive courses in paramedic training, EMS, and healthcare education. From CPR certification to advanced trauma care, equip yourself with essential skills for a career in emergency services." />
+				{/* <meta property="og:image" content="URL_to_image/about-us-image.jpg" /> */}
+				<meta property="og:url" content="https://medicmode.com/courses" />
+				<meta property="og:type" content="website" />
+		</Helmet>
       <div className="course-header">
         <Swiper
           style={{backgroundColor: 'transparent'}}
@@ -171,7 +183,7 @@ const Courses = ({ logged }) => {
       </div>
       <div className="courses">
         <div className="course-heading">
-          <h1>Our Courses</h1>
+          <h1>Our <span style={{color:'var(--orange)'}}>Courses</span></h1>
           <div className="course-search">
             <h3>Search</h3>
             <div className="search-container">
@@ -239,7 +251,7 @@ const Courses = ({ logged }) => {
         </div>
       </div>
       <div className="our-trainers">
-        <h1>Meet Our Faculties</h1>
+        <h2 style={{fontSize:'35px'}}>Meet Our <span style={{color:'var(--orange)'}}>Faculties</span></h2>
         <div className="trainers-container">
           <div className="trainers-row">
             {facultyImages.slice(0, 3).map((image, index) => (
